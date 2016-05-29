@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trueno JS driver test</title>
+    <script src="../dist_browser/trueno.js"></script>
+    <script>
+
+        let trueno = new Trueno();
+
+        trueno.connect(function (s) {
+
+            console.log('connected', s.id);
+
+
+            trueno.getGraph({p: 'hello'}).then(function (result) {
+                console.log(result);
+            });
+
+
+        }, function (s) {
+            console.log('disconnected', s.id);
+        });
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
