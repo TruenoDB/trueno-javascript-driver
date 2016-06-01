@@ -6,21 +6,22 @@
  *
  */
 
-const Trueno = require('trueno-javascript-driver');
+const Trueno = require('../lib/trueno');
 
 /* Instantiate connection */
 
-let trueno = new Trueno();
+let trueno = new Trueno({host:'http://localhost', port:8000});
 
 trueno.connect((s)=>{
 
   console.log('connected', s.id);
 
 
-  trueno.getGraph({p:'hello'}).then((result)=>{
-    console.log(result);
-  });
+  trueno.getGraph({p:'hello'}).then((g)=>{
 
+    console.log(g);
+
+  });
 
 }, (s)=>{
   console.log('disconnected', s.id);
