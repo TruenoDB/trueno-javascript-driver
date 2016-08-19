@@ -10,7 +10,7 @@ const Trueno = require('../lib/trueno');
 
 /* Instantiate connection */
 
-let trueno = new Trueno({host: 'http://localhost', port: 8000});
+let trueno = new Trueno({host: 'http://localhost', port: 8000, debug: true});
 
 trueno.connect((s)=> {
 
@@ -26,6 +26,7 @@ trueno.connect((s)=> {
 
   /* Adding properties */
   g.setProperty('version', 1);
+  g.setLabel('mygraph');
   v1.setProperty('name', 'pepe');
   v1.setProperty('gender', 'M');
   v2.setProperty('name', 'juan');
@@ -64,71 +65,71 @@ trueno.connect((s)=> {
   }, (error) => {
     console.log("Error: Graph g persistence failed", error);
   });
-  /* persist v1 */
-  v1.persist().then((result) => {
-    console.log("Vertex v1 persisted", result);
-  }, (error) => {
-    console.log("Error: Vertex v1 persistence failed", error);
-  });
-  /* persist v2 */
-  v2.persist().then((result) => {
-    console.log("Vertex v2 persisted", result);
-  }, (error) => {
-    console.log("Error: Vertex v2 persistence failed", error);
-  });
-  /* persist v3 */
-  v3.persist().then((result) => {
-    console.log("Vertex v3 persisted", result);
-  }, (error) => {
-    console.log("Error: Vertex v3 persistence failed", error);
-  });
-  /* persist e1 */
-  e1.persist().then((result) => {
-    console.log("Edge e1 persisted", result);
-  }, (error) => {
-    console.log("Error: Edge e1 persistence failed", error);
-  });
-  /* persist e2 */
-  e2.persist().then((result) => {
-    console.log("Edge e2 persisted", result);
-  }, (error) => {
-    console.log("Error: Edge e2 persistence failed", error);
-  });
-
-  console.log('---------------------------Fetch Calls----------------------------');
-  /* fetch graphs */
-  g.fetch('g').then((graphs) => {
-
-  }, (error) => {
-
-  });
-  /* fetch vertices */
-  g.fetch('v').then((vertices) => {
-
-  }, (error) => {
-
-  });
-  /* fetch edges  */
-  g.fetch('e').then((edges) => {
-
-  }, (error) => {
-
-  });
-  console.log('---------------------------Count Calls----------------------------');
-  /* destroy the graph object */
-  g.count('g').then((result)=> {
-    /* The graph will be deleted with all edges and vertices */
-  });
-
-  /* destroy the vertices with such filter */
-  g.count('v').then((result)=> {
-    /* here the two vertices v1 and v2 are persisted into the database */
-  });
-
-  /* destroy the new and updated edges */
-  g.count('e').then((result)=> {
-    /* here the edge v1 -> v2 is persisted into the database */
-  });
+  ///* persist v1 */
+  //v1.persist().then((result) => {
+  //  console.log("Vertex v1 persisted", result);
+  //}, (error) => {
+  //  console.log("Error: Vertex v1 persistence failed", error);
+  //});
+  ///* persist v2 */
+  //v2.persist().then((result) => {
+  //  console.log("Vertex v2 persisted", result);
+  //}, (error) => {
+  //  console.log("Error: Vertex v2 persistence failed", error);
+  //});
+  ///* persist v3 */
+  //v3.persist().then((result) => {
+  //  console.log("Vertex v3 persisted", result);
+  //}, (error) => {
+  //  console.log("Error: Vertex v3 persistence failed", error);
+  //});
+  ///* persist e1 */
+  //e1.persist().then((result) => {
+  //  console.log("Edge e1 persisted", result);
+  //}, (error) => {
+  //  console.log("Error: Edge e1 persistence failed", error);
+  //});
+  ///* persist e2 */
+  //e2.persist().then((result) => {
+  //  console.log("Edge e2 persisted", result);
+  //}, (error) => {
+  //  console.log("Error: Edge e2 persistence failed", error);
+  //});
+  //
+  //console.log('---------------------------Fetch Calls----------------------------');
+  ///* fetch graphs */
+  //g.fetch('g').then((graphs) => {
+  //
+  //}, (error) => {
+  //
+  //});
+  ///* fetch vertices */
+  //g.fetch('v').then((vertices) => {
+  //
+  //}, (error) => {
+  //
+  //});
+  ///* fetch edges  */
+  //g.fetch('e').then((edges) => {
+  //
+  //}, (error) => {
+  //
+  //});
+  //console.log('---------------------------Count Calls----------------------------');
+  ///* destroy the graph object */
+  //g.count('g').then((result)=> {
+  //  /* The graph will be deleted with all edges and vertices */
+  //});
+  //
+  ///* destroy the vertices with such filter */
+  //g.count('v').then((result)=> {
+  //  /* here the two vertices v1 and v2 are persisted into the database */
+  //});
+  //
+  ///* destroy the new and updated edges */
+  //g.count('e').then((result)=> {
+  //  /* here the edge v1 -> v2 is persisted into the database */
+  //});
 
 
 }, (s)=> {
