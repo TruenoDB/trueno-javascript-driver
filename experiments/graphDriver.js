@@ -102,6 +102,22 @@ trueno.connect((s)=> {
     console.log("Error: Edge e2 persistence failed", error);
   });
 
+  console.log('---------------------------Filter Creating----------------------------');
+
+  /* Create a filter */
+  let filter = g.filter()
+  .term('prop.name', 'pedro')
+  .range('prop.age', 'gt', 8)
+  .range('prop.age', 'lt', 22)
+  .exist('prop.salary')
+  .missing('prop.gender')
+  .wildcard('prop.gender', 'fe*')
+  .regexp('prop.name', 'fer.*o$')
+  .or()
+  .prefix('prop.name', 'au')
+  .limit(50);
+
+
   console.log('---------------------------Fetch Calls----------------------------');
 
   ///* fetch graphs */
@@ -111,19 +127,20 @@ trueno.connect((s)=> {
 
   });
   /* fetch vertices */
-  g.fetch('v').then((vertices) => {
+  g.fetch('v',filter).then((vertices) => {
 
   }, (error) => {
 
   });
   /* fetch edges  */
-  g.fetch('e').then((edges) => {
+  g.fetch('e',filter).then((edges) => {
 
   }, (error) => {
 
   });
   console.log('---------------------------Count Calls----------------------------');
-  g.count('g').then((result)=> {
+
+  g.count('g',filter).then((result)=> {
     /* The graph will be deleted with all edges and vertices */
   });
 
@@ -133,7 +150,7 @@ trueno.connect((s)=> {
   });
 
   /* destroy the new and updated edges */
-  g.count('e').then((result)=> {
+  g.count('e',filter).then((result)=> {
     /* here the edge v1 -> v2 is persisted into the database */
   });
 
