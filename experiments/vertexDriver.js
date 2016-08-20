@@ -10,7 +10,7 @@ const Trueno = require('../lib/trueno');
 
 /* Instantiate connection */
 
-let trueno = new Trueno({host: 'http://localhost', port: 8000});
+let trueno = new Trueno({host: 'http://localhost', port: 8000, debug: true});
 
 trueno.connect((s)=> {
 
@@ -20,59 +20,46 @@ trueno.connect((s)=> {
   let g = trueno.Graph();
   let v = g.addVertex();
 
-  v.load(1).then((v) => {
+  g.setId(1);
+  v.setId(1);
 
-    console.log(v.getId()); /* display the vertex ID */
-    /* display property */
-    console.log(v.getProperty('age')); /* display age in console */
-    v.setProperty('name', 'John');
-
-    return g.persist('v');
-
-  }).then((result) => {
-
-    /* Persist vertex */
-    console.log(result);
-
-  });
-
+  console.log('------------------------Neighbors-------------------------------');
   /* Get the out vertices, i.e outgoing neighbors */
-  v.out('v').then((vertices)=>{
+  v.out('v').then((vertices)=> {
 
   });
 
   /* Get the out edges, i.e outgoing edges */
-  v.out('e').then((edges)=>{
+  v.out('e').then((edges)=> {
 
   });
 
   /* Get the in vertices, i.e  incoming neighbors */
-  v.in('v').then((vertices)=>{
+  v.in('v').then((vertices)=> {
 
   });
 
   /* Get the in edges, i.e  incoming edges */
-  v.in('e').then((edges)=>{
+  v.in('e').then((edges)=> {
 
   });
 
-  /* Get with filter */
-  let filter =  v.filter()
-  .range('prop.weight','gt',8)
-  .range('prop.weight','lt',22)
-  .limit(20);
-
-  v.in('e',filter).then((edges)=>{
-
-  });
+  console.log('------------------------Degree-------------------------------');
 
   /* Get the in vertices, i.e  incoming neighbors */
-  v.inDegree('v').then((count)=>{
+  v.inDegree('v').then((count)=> {
 
   });
+  /* Get the in vertices, i.e  incoming neighbors */
+  v.inDegree('e').then((count)=> {
 
+  });
   /* Get the out edges, i.e outgoing edges */
-  v.outDegree('e', filter).then((count)=>{
+  v.outDegree('v').then((count)=> {
+
+  });
+  /* Get the out edges, i.e outgoing edges */
+  v.outDegree('e').then((count)=> {
 
   });
 

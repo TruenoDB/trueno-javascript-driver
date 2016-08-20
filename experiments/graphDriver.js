@@ -65,71 +65,104 @@ trueno.connect((s)=> {
   }, (error) => {
     console.log("Error: Graph g persistence failed", error);
   });
-  ///* persist v1 */
-  //v1.persist().then((result) => {
-  //  console.log("Vertex v1 persisted", result);
-  //}, (error) => {
-  //  console.log("Error: Vertex v1 persistence failed", error);
-  //});
-  ///* persist v2 */
-  //v2.persist().then((result) => {
-  //  console.log("Vertex v2 persisted", result);
-  //}, (error) => {
-  //  console.log("Error: Vertex v2 persistence failed", error);
-  //});
-  ///* persist v3 */
-  //v3.persist().then((result) => {
-  //  console.log("Vertex v3 persisted", result);
-  //}, (error) => {
-  //  console.log("Error: Vertex v3 persistence failed", error);
-  //});
-  ///* persist e1 */
-  //e1.persist().then((result) => {
-  //  console.log("Edge e1 persisted", result);
-  //}, (error) => {
-  //  console.log("Error: Edge e1 persistence failed", error);
-  //});
-  ///* persist e2 */
-  //e2.persist().then((result) => {
-  //  console.log("Edge e2 persisted", result);
-  //}, (error) => {
-  //  console.log("Error: Edge e2 persistence failed", error);
-  //});
-  //
-  //console.log('---------------------------Fetch Calls----------------------------');
+  /* persist v1 */
+  v1.persist().then((result) => {
+    console.log("Vertex v1 persisted", result);
+  }, (error) => {
+    console.log("Error: Vertex v1 persistence failed", error);
+  });
+  /* persist v2 */
+  v2.persist().then((result) => {
+    console.log("Vertex v2 persisted", result);
+  }, (error) => {
+    console.log("Error: Vertex v2 persistence failed", error);
+  });
+
+
+  /* Set graph id, this will be used instead of the session reference */
+  g.setId(1);
+
+
+  /* persist v3 */
+  v3.persist().then((result) => {
+    console.log("Vertex v3 persisted", result);
+  }, (error) => {
+    console.log("Error: Vertex v3 persistence failed", error);
+  });
+  /* persist e1 */
+  e1.persist().then((result) => {
+    console.log("Edge e1 persisted", result);
+  }, (error) => {
+    console.log("Error: Edge e1 persistence failed", error);
+  });
+  /* persist e2 */
+  e2.persist().then((result) => {
+    console.log("Edge e2 persisted", result);
+  }, (error) => {
+    console.log("Error: Edge e2 persistence failed", error);
+  });
+
+  console.log('---------------------------Fetch Calls----------------------------');
+
   ///* fetch graphs */
-  //g.fetch('g').then((graphs) => {
-  //
-  //}, (error) => {
-  //
-  //});
-  ///* fetch vertices */
-  //g.fetch('v').then((vertices) => {
-  //
-  //}, (error) => {
-  //
-  //});
-  ///* fetch edges  */
-  //g.fetch('e').then((edges) => {
-  //
-  //}, (error) => {
-  //
-  //});
-  //console.log('---------------------------Count Calls----------------------------');
-  ///* destroy the graph object */
-  //g.count('g').then((result)=> {
-  //  /* The graph will be deleted with all edges and vertices */
-  //});
-  //
-  ///* destroy the vertices with such filter */
-  //g.count('v').then((result)=> {
-  //  /* here the two vertices v1 and v2 are persisted into the database */
-  //});
-  //
-  ///* destroy the new and updated edges */
-  //g.count('e').then((result)=> {
-  //  /* here the edge v1 -> v2 is persisted into the database */
-  //});
+  g.fetch('g').then((graphs) => {
+
+  }, (error) => {
+
+  });
+  /* fetch vertices */
+  g.fetch('v').then((vertices) => {
+
+  }, (error) => {
+
+  });
+  /* fetch edges  */
+  g.fetch('e').then((edges) => {
+
+  }, (error) => {
+
+  });
+  console.log('---------------------------Count Calls----------------------------');
+  g.count('g').then((result)=> {
+    /* The graph will be deleted with all edges and vertices */
+  });
+
+  /* destroy the vertices with such filter */
+  g.count('v').then((result)=> {
+    /* here the two vertices v1 and v2 are persisted into the database */
+  });
+
+  /* destroy the new and updated edges */
+  g.count('e').then((result)=> {
+    /* here the edge v1 -> v2 is persisted into the database */
+  });
+
+  console.log('---------------------------Destroy Calls----------------------------');
+
+  /* setting id's */
+  g.setId(1);
+  v1.setId(1);
+  e1.setId(1);
+
+  g.destroy().then((result) => {
+    console.log("Graph g destroyed", result);
+  }, (error) => {
+    console.log("Error: Graph g destruction failed", error);
+  });
+
+  /* persist v1 */
+  v1.destroy().then((result) => {
+    console.log("Vertex v1 destroyed", result);
+  }, (error) => {
+    console.log("Error: Vertex v1 destruction failed", error);
+  });
+
+  /* persist v2 */
+  e1.destroy().then((result) => {
+    console.log("Edge g1 destroyed", result);
+  }, (error) => {
+    console.log("Error: Edge e1 destruction failed", error);
+  });
 
 
 }, (s)=> {
