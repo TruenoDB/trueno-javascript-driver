@@ -23,9 +23,24 @@ trueno.connect((s)=> {
   g.setId(1);
   v.setId(1);
 
+  /* Create a filter */
+  let filter = g.filter()
+  .term('prop.name', 'pedro')
+  .range('prop.age', 'gt', 8)
+  .range('prop.age', 'lt', 22)
+  .exist('prop.salary')
+  .not()
+  .exist('prop.gender')
+  .wildcard('prop.gender', 'fe*')
+  .regexp('prop.name', 'fer.*o$')
+  .or()
+  .prefix('prop.name', 'au')
+  .limit(50);
+
+
   console.log('------------------------Neighbors-------------------------------');
   /* Get the out vertices, i.e outgoing neighbors */
-  v.out('v').then((vertices)=> {
+  v.out('v',filter).then((vertices)=> {
 
   });
 
@@ -40,7 +55,7 @@ trueno.connect((s)=> {
   });
 
   /* Get the in edges, i.e  incoming edges */
-  v.in('e').then((edges)=> {
+  v.in('e', filter).then((edges)=> {
 
   });
 
@@ -51,11 +66,11 @@ trueno.connect((s)=> {
 
   });
   /* Get the in vertices, i.e  incoming neighbors */
-  v.inDegree('e').then((count)=> {
+  v.inDegree('e', filter).then((count)=> {
 
   });
   /* Get the out edges, i.e outgoing edges */
-  v.outDegree('v').then((count)=> {
+  v.outDegree('v', filter).then((count)=> {
 
   });
   /* Get the out edges, i.e outgoing edges */
