@@ -25,8 +25,8 @@ trueno.connect((s)=> {
   let e2 = g.addEdge(v1, 23);
 
   /* Adding properties */
-  g.setProperty('version', 1);
   g.setLabel('mygraph');
+  g.setProperty('version', 1);
   v1.setProperty('name', 'pepe');
   v1.setProperty('gender', 'M');
   v2.setProperty('name', 'juan');
@@ -128,20 +128,20 @@ trueno.connect((s)=> {
 
   });
   /* fetch vertices */
-  g.fetch('v',filter).then((vertices) => {
+  g.fetch('v', filter).then((vertices) => {
 
   }, (error) => {
 
   });
   /* fetch edges  */
-  g.fetch('e',filter).then((edges) => {
+  g.fetch('e', filter).then((edges) => {
 
   }, (error) => {
 
   });
   console.log('---------------------------Count Calls----------------------------');
 
-  g.count('g',filter).then((result)=> {
+  g.count('g', filter).then((result)=> {
     /* The graph will be deleted with all edges and vertices */
   });
 
@@ -151,7 +151,7 @@ trueno.connect((s)=> {
   });
 
   /* destroy the new and updated edges */
-  g.count('e',filter).then((result)=> {
+  g.count('e', filter).then((result)=> {
     /* here the edge v1 -> v2 is persisted into the database */
   });
 
