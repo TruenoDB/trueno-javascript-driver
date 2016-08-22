@@ -15,8 +15,6 @@ let trueno = new Trueno({host: 'http://localhost', port: 8000, debug: true});
 trueno.connect((s)=> {
 
   console.log('connected', s.id);
-  console.log('------------------------Properties, computed, and meta-------------------------------');
-
 
   /* Create a new Graph */
   let g = trueno.Graph();
@@ -24,17 +22,11 @@ trueno.connect((s)=> {
   /* Set label: very important */
   g.setLabel('graphi');
 
-  /* Adding properties and computed fields */
-  g.setProperty('version', 1);
-  //g.setComputed('pagerank', 'top2', [[1, 4.32], [32, 4.01]]);
-  g.setComputed('pagerank', 'average', 2.55);
-  g.setComputed('pagerank', 'low', 1);
-
   /* persist g */
-  g.create().then((result) => {
-    console.log("Graph g created", result);
+  g.destroy().then((result) => {
+    console.log("Graph g destroyed", result);
   }, (error) => {
-    console.log("Error: Graph g creation failed", error);
+    console.log("Error: Graph g destruction failed", error);
   });
 
 }, (s)=> {

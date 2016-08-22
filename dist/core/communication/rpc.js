@@ -34,6 +34,8 @@ var RPC = (function () {
     this._host = param.host || 'http://localhost';
     /* The database port */
     this._port = param.port || 8000;
+    /* http server app */
+    this._app = param.app || null;
     /* Exposed procedure functions for remote calls */
     this._procedures = [];
     /* Connected sockets (for server mode) */
@@ -61,18 +63,22 @@ var RPC = (function () {
       var self = this;
 
       /* Extracting arguments */
-      var upperArgs = arguments;
+      var upperArgs = Array.prototype.slice.call(arguments);
 
       /* Promise to be returned */
       return new Promise(function (resolve, reject) {
 
-        /* Emit event on this socket */
-        self._socket.emit.apply(self._socket, upperArgs);
-
-        /* Await for response */
-        self._socket.once('_' + upperArgs[0] + '_response', function (args) {
+        /* Check if we must past null data, otherwise acknowledge callback won't work. */
+        if (upperArgs.length < 2) {
+          upperArgs.push(null);
+        }
+        /* pushing acknowledge callback */
+        upperArgs.push(function (args) {
           resolve(args);
         });
+
+        /* Emit event on this socket */
+        self._socket.emit.apply(self._socket, upperArgs);
       });
     }
   }, {
@@ -110,9 +116,18 @@ var RPC = (function () {
 
       /* This instance object reference */
       var self = this;
+      var io_conn = undefined;
 
       /* Listening for connections */
-      var io_conn = require('socket.io').listen(this._port);
+      if (this._app) {
+        /* connecting with http server app */
+        io_conn = require('socket.io')(this._app);
+        /* Listening to port */
+        this._app.listen(this._port);
+      } else {
+        /* listening with raw socket */
+        io_conn = require('socket.io').listen(this._port);
+      }
 
       /* Set connection */
       io_conn.on('connection', function (socket) {
@@ -163,14 +178,9 @@ var RPC = (function () {
       /* Adding RPM functions */
       self._procedures.forEach(function (proc) {
 
-        /* results function */
-        var resFunc = function resFunc(args) {
-          obj.socket.emit('_' + proc.name + '_response', args);
-        };
-
         /* Adding listener to each call */
-        obj.socket.on(proc.name, function (args) {
-          proc.fn(resFunc, args);
+        obj.socket.on(proc.name, function (args, fn) {
+          proc.fn(fn, args);
         });
       });
 

@@ -61,7 +61,7 @@ var Graph = (function (_Component) {
     this.__edges = {};
 
     /* If true, graph is directed, if false is undirected(default) */
-    this._directed = param.directed || false;
+    this._directed = param.directed || true;
     /* True if the graph is dynamic, default static */
     this._dynamic = param.dynamic || false;
     /* True if the graph is a multi graph(parallel edges between same vertices */
@@ -185,9 +185,9 @@ var Graph = (function (_Component) {
       var self = this;
       var apiFunc = 'ex_fetch';
 
-      if (!this.getId()) {
+      if (!this.getLabel()) {
         /* Error if id is not present */
-        throw new Error('Graph id is required, set this graph instance id or load graph.', this);
+        throw new Error('Graph label is required, set this graph instance label or load graph.', this);
       }
       /* Extracting filters if provided */
       if (ftr) {
@@ -195,11 +195,11 @@ var Graph = (function (_Component) {
       }
 
       /* building the message */
-      var msg = Message.buildMessage({ payload: { graph: this.getId(), type: cmp.toLowerCase(), ftr: ftr } });
+      var msg = Message.buildMessage({ payload: { graph: this.getLabel(), type: cmp.toLowerCase(), ftr: ftr } });
 
       /* if debug display operation params */
       if (this.__debug) {
-        console.log('DEBUG[fetch]: ', apiFunc, msg);
+        console.log('DEBUG[fetch]: ', apiFunc, JSON.stringify(msg));
       }
 
       /* return promise with the async operation */
@@ -229,9 +229,9 @@ var Graph = (function (_Component) {
       var self = this;
       var apiFunc = 'ex_count';
 
-      if (!this.getId()) {
+      if (!this.getLabel()) {
         /* Error if id is not present */
-        throw new Error('Graph id is required, set this graph instance id or load graph.', this);
+        throw new Error('Graph label is required, set this graph instance label or load graph.', this);
       }
       /* Extracting filters if provided */
       if (ftr) {
@@ -239,7 +239,7 @@ var Graph = (function (_Component) {
       }
 
       /* building the message */
-      var msg = Message.buildMessage({ payload: { graph: this.getId(), type: cmp.toLowerCase(), ftr: ftr } });
+      var msg = Message.buildMessage({ payload: { graph: this.getLabel(), type: cmp.toLowerCase(), ftr: ftr } });
 
       /* if debug display operation params */
       if (this.__debug) {

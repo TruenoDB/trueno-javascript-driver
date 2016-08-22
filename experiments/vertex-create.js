@@ -24,17 +24,30 @@ trueno.connect((s)=> {
   /* Set label: very important */
   g.setLabel('graphi');
 
-  /* Adding properties and computed fields */
-  g.setProperty('version', 1);
-  //g.setComputed('pagerank', 'top2', [[1, 4.32], [32, 4.01]]);
-  g.setComputed('pagerank', 'average', 2.55);
-  g.setComputed('pagerank', 'low', 1);
+  let v1 = g.addVertex();
+  let v2 = g.addVertex();
 
-  /* persist g */
-  g.create().then((result) => {
-    console.log("Graph g created", result);
+  /* Set custom ids */
+  v1.setId(1);
+  v2.setId(2);
+
+  /* Adding properties and computed fields */
+  v1.setProperty('name', 'pepe');
+  v1.setProperty('gender', 'F');
+  v2.setProperty('name', 'juan');
+  v2.setComputed('pagerank', 'rank', 5);
+
+  /* persist v1 */
+  v1.persist().then((result) => {
+    console.log('Vertex successfully created with id: ', result);
   }, (error) => {
-    console.log("Error: Graph g creation failed", error);
+    console.log('Vertex persistence error: ',error);
+  });
+  /* persist v2 */
+  v2.persist().then((result) => {
+    console.log('Vertex successfully created with id: ', result);
+  }, (error) => {
+    console.log('Vertex persistence error: ',error);
   });
 
 }, (s)=> {

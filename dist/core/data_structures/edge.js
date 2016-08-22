@@ -147,22 +147,22 @@ var Edge = (function (_Component) {
         /* Error if id is not present */
         throw new Error('Edge id is required, set this edge instance id or load edge.', this);
       }
-      if (!this.__parentGraph.getId()) {
+      if (!this.__parentGraph.getLabel()) {
         /* Error if id is not present */
-        throw new Error('Graph id is required ', this.__parentGraph);
+        throw new Error('Graph label is required, set this graph instance label or load graph.', this.__parentGraph);
       }
 
       /* building the message */
       var msg = Message.buildMessage({
         payload: {
-          graph: this.__parentGraph.getId(),
+          graph: this.__parentGraph.getLabel(),
           id: this.getId()
         }
       });
 
       /* if debug display operation params */
       if (this.__debug) {
-        console.log('DEBUG[out]: ', apiFunc, msg);
+        console.log('DEBUG[out]: ', apiFunc, JSON.stringify(msg));
       }
 
       /* return promise with the async operation */

@@ -126,9 +126,9 @@ var Vertex = (function (_Component) {
         /* Error if id is not present */
         throw new Error('Vertex id is required ', this);
       }
-      if (!this.__parentGraph.getId()) {
+      if (!this.__parentGraph.getLabel()) {
         /* Error if id is not present */
-        throw new Error('Graph id is required ', this.__parentGraph);
+        throw new Error('Graph label is required, set this graph instance label or load graph.', this.__parentGraph);
       }
 
       /* Extracting filters if provided */
@@ -139,7 +139,7 @@ var Vertex = (function (_Component) {
       /* building the message */
       var msg = Message.buildMessage({
         payload: {
-          graph: this.__parentGraph.getId(),
+          graph: this.__parentGraph.getLabel(),
           id: this.getId(),
           dir: dir,
           cmp: cmp.toLowerCase(),
@@ -149,7 +149,7 @@ var Vertex = (function (_Component) {
 
       /* if debug display operation params */
       if (this.__debug) {
-        console.log('DEBUG[out]: ', apiFunc, msg);
+        console.log('DEBUG[out]: ', apiFunc, apiFunc, JSON.stringify(msg));
       }
 
       /* return promise with the async operation */
@@ -209,9 +209,9 @@ var Vertex = (function (_Component) {
         /* Error if id is not present */
         throw new Error('Vertex id is required ', this);
       }
-      if (!this.__parentGraph.getId()) {
+      if (!this.__parentGraph.getLabel()) {
         /* Error if id is not present */
-        throw new Error('Graph id is required ', this.__parentGraph);
+        throw new Error('Graph label is required, set this graph instance label or load graph.', this.__parentGraph);
       }
 
       /* Extracting filters if provided */
@@ -222,7 +222,7 @@ var Vertex = (function (_Component) {
       /* building the message */
       var msg = Message.buildMessage({
         payload: {
-          graph: this.__parentGraph.getId(),
+          graph: this.__parentGraph.getLabel(),
           id: this.getId(),
           dir: dir,
           cmp: cmp.toLowerCase(),
@@ -232,7 +232,7 @@ var Vertex = (function (_Component) {
 
       /* if debug display operation params */
       if (this.__debug) {
-        console.log('DEBUG[' + dir + 'Degree]: ', apiFunc, msg);
+        console.log('DEBUG[' + dir + 'Degree]: ', apiFunc, JSON.stringify(msg));
       }
 
       /* return promise with the async operation */
