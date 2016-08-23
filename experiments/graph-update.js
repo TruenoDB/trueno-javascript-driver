@@ -24,30 +24,19 @@ trueno.connect((s)=> {
   /* Set label: very important */
   g.setLabel('graphi');
 
-  let e1 = g.addEdge(1,2);
-  let e2 = g.addEdge(2,3);
-
-  e1.setId(1);
-  e2.setId(2);
-
   /* Adding properties and computed fields */
-  e1.setProperty('weight', 35);
-  e1.setProperty('relation', 'love');
-  e1.setProperty('weight', 45);
-  e1.setProperty('relation', 'hate');
-  e2.setComputed('pagerank', 'rank', 5);
+  g.setProperty('version', 2);
+  g.setProperty('type', 'Biological');
+  g.setProperty('snapshot', new Date());
+  //g.setComputed('pagerank', 'top2', [[1, 4.32], [32, 4.01]]);
+  g.setComputed('pagerank', 'average', 15);
+  g.setComputed('pagerank', 'low', 5);
 
-  /* persist v1 */
-  e1.persist().then((result) => {
-    console.log('Edge successfully created with id: ', e1.getId());
+  /* persist g */
+  g.persist().then((result) => {
+    console.log(result);
   }, (error) => {
-    console.log('Edge persistence error: ',error);
-  });
-  /* persist v2 */
-  e2.persist().then((result) => {
-    console.log('Edge successfully created with id: ', e2.getId());
-  }, (error) => {
-    console.log('Edge persistence error: ',error);
+    console.log(error);
   });
 
 }, (s)=> {

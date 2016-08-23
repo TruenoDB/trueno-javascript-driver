@@ -31,11 +31,11 @@ trueno.connect((s)=> {
   e2.setId(2);
 
   /* Adding properties and computed fields */
-  e1.setProperty('weight', 35);
-  e1.setProperty('relation', 'love');
-  e1.setProperty('weight', 45);
-  e1.setProperty('relation', 'hate');
-  e2.setComputed('pagerank', 'rank', 5);
+  e1.setProperty('weight', 0);
+  e1.setProperty('relation', 'friendship');
+  e1.setProperty('weight', 11);
+  e1.setProperty('relation', 'bussiness');
+  e2.setComputed('pagerank', 'rank', -1);
 
   /* persist v1 */
   e1.persist().then((result) => {
