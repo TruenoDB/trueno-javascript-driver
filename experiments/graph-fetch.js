@@ -25,8 +25,19 @@ trueno.connect((s)=> {
   let filter = g.filter()
                 .term('prop.version', '1');
 
+                /* Create a filter */
+  let filter2 = g.filter()
+                  .term('prop.name', 'pedro');
+                  
+
   /* persist g */
   g.fetch('g',filter).then((result) => {
+    console.log("Info from Graph g fetched", result);
+  }, (error) => {
+    console.log("Error: Could not fetch Graph g info", error);
+  });
+
+  g.fetch('v',filter2).then((result) => {
     console.log("Info from Graph g fetched", result);
   }, (error) => {
     console.log("Error: Could not fetch Graph g info", error);
