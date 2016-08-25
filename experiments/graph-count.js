@@ -32,6 +32,13 @@ trueno.connect((s)=> {
     console.log("Error: Could not count Graph g info", error);
   });
 
+  g.count('v').then((result) => {
+    console.log("Total vertices in graph", result);
+  }, (error) => {
+    console.log("Error: Could not count vertices", error);
+  });
+
+
 }, (s)=> {
   console.log('disconnected', s.id);
 })
