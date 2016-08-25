@@ -24,10 +24,11 @@ trueno.connect((s)=> {
 
   let v1 = g.addVertex();
   v1.setId(1);
+  v1.setLabel('graphi');
 
   /* Create a filter */
-  let filter = g.filter()
-                  .term('prop.name', 'pedro');
+  let filter = v1.filter()
+                  .term('prop.name', 'pepe');
                   /*.range('prop.age', 'gt', 8)
                   .range('prop.age', 'lt', 22)
                   .exist('prop.salary')
@@ -39,11 +40,16 @@ trueno.connect((s)=> {
                   .prefix('prop.name', 'au')
                   .limit(50);*/
 
-  g.fetch('v',filter).then((result) => {
-    console.log('Vertex fetch successful: ', result);
-  }, (error) => {
-    console.log('Vertex fetch failed: ', error);
+  v1.fetch('v',filter).then((result) => {
+    console.log('Vertex fetch', result);
   });
+
+  //maverick
+  // g.fetch('v',filter).then((result) => {
+  //   console.log('Vertex fetch successful: ', result);
+  // }, (error) => {
+  //   console.log('Vertex fetch failed: ', error);
+  // });
 
 
 }, (s)=> {
