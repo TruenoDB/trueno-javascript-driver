@@ -26,16 +26,20 @@ trueno.connect((s)=> {
 
   let e1 = g.addEdge(1,2);
   let e2 = g.addEdge(2,3);
+  let e3 = g.addEdge(1,3);
 
   e1.setId(1);
   e2.setId(2);
+  e3.setId(3);
 
   /* Adding properties and computed fields */
   e1.setProperty('weight', 35);
   e1.setProperty('relation', 'love');
-  e1.setProperty('weight', 45);
   e1.setProperty('relation', 'hate');
   e2.setComputed('pagerank', 'rank', 5);
+  e2.setProperty('weight', 45);
+  e3.setProperty('relation', 'joy');
+  e3.setProperty('weight', 20);
 
   /* persist v1 */
   e1.persist().then((result) => {
@@ -46,6 +50,12 @@ trueno.connect((s)=> {
   /* persist v2 */
   e2.persist().then((result) => {
     console.log('Edge successfully created with id: ', e2.getId());
+  }, (error) => {
+    console.log('Edge persistence error: ',error);
+  });
+  /* persist v2 */
+  e3.persist().then((result) => {
+    console.log('Edge successfully created with id: ', e3.getId());
   }, (error) => {
     console.log('Edge persistence error: ',error);
   });
