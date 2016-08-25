@@ -26,10 +26,10 @@ trueno.connect((s)=> {
   e1.setId(1);
 
   /* Create a filter */
-  let filter = e1.filter()
+  let filter = g.filter()
                   .term('prop.relation', 'hate');
 
-  e1.fetch('e',filter).then((result) => {
+  g.fetch('e',filter).then((result) => {
     console.log('Edge fetch successful: ', result);
   }, (error) => {
     console.log('Edge fetch failed: ', error);

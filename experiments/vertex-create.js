@@ -28,8 +28,8 @@ trueno.connect((s)=> {
   let v2 = g.addVertex();
 
   /* Set custom ids */
-  v1.setId(1);
-  v2.setId(2);
+  v1.setId(3);
+  v2.setId(4);
 
   /* Adding properties and computed fields */
   v1.setProperty('name', 'pepe');

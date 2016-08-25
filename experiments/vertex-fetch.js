@@ -27,7 +27,7 @@ trueno.connect((s)=> {
   v1.setLabel('graphi');
 
   /* Create a filter */
-  let filter = v1.filter()
+  let filter = g.filter()
                   .term('prop.name', 'pepe');
                   /*.range('prop.age', 'gt', 8)
                   .range('prop.age', 'lt', 22)
@@ -40,7 +40,7 @@ trueno.connect((s)=> {
                   .prefix('prop.name', 'au')
                   .limit(50);*/
 
-  v1.fetch('v',filter).then((result) => {
+  g.fetch('v',filter).then((result) => {
     console.log('Vertex fetch', result);
   });
 
