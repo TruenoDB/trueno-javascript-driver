@@ -44,13 +44,6 @@ trueno.connect((s)=> {
     console.log('Vertex fetch', result);
   });
 
-  //maverick
-  // g.fetch('v',filter).then((result) => {
-  //   console.log('Vertex fetch successful: ', result);
-  // }, (error) => {
-  //   console.log('Vertex fetch failed: ', error);
-  // });
-
 
 }, (s)=> {
   console.log('disconnected', s.id);
