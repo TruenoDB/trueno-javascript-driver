@@ -27,11 +27,11 @@ trueno.connect((s)=> {
   g.setProperty('version', 1);
 
   /* persist g */
-  g.create().then((result) => {
-    console.log("Graph g created", result);
-  }, (error) => {
-    console.log("Error: Graph g creation failed", error);
-  });
+  // g.create().then((result) => {
+  //   console.log("Graph g created", result);
+  // }, (error) => {
+  //   console.log("Error: Graph g creation failed", error);
+  // });
 
   let v1 = g.addVertex();
   let v2 = g.addVertex();
@@ -67,11 +67,7 @@ trueno.connect((s)=> {
   v6.setProperty('name', 'bob');
   v6.setProperty('age', '50');
 
-  // v2.setProperty('name', 'juan');
-  // v2.setComputed('pagerank', 'rank', 5);
-  // v3.setProperty('name', 'Rick');
-
-  /*Edges */
+  /* Edges */
   let e1 = g.addEdge(1,4);//alice -> peter
   let e2 = g.addEdge(2,1);//aura -> alice
   let e3 = g.addEdge(2,3);//aura -> alison
@@ -80,7 +76,7 @@ trueno.connect((s)=> {
   let e6 = g.addEdge(4,5);//peter -> cat
   let e7 = g.addEdge(4,6);//peter -> bob
 
-  /* Adding properties and labels*/
+  /* Adding properties and labels */
   e1.setLabel('knows');
   e2.setLabel('knows');
   e3.setLabel('knows');
@@ -97,6 +93,7 @@ trueno.connect((s)=> {
   e6.setProperty('since', 10);
   e7.setProperty('since', 10);
 
+ /* Persisting vertices */
 
   /* persist v1 */
   v1.persist().then((result) => {
@@ -173,7 +170,7 @@ trueno.connect((s)=> {
   }, (error) => {
     console.log('Edge persistence error: ',error);
   });
-    /* persist e6 */
+    /* persist e7 */
   e7.persist().then((result) => {
     console.log('Edge successfully created with id: ', e7.getId());
   }, (error) => {

@@ -58,9 +58,9 @@ trueno.connect((s)=> {
   v6.setProperty('name', 'bob');
   v6.setProperty('age', '50');
 
-  // v2.setProperty('name', 'juan');
-  // v2.setComputed('pagerank', 'rank', 5);
-  // v3.setProperty('name', 'Rick');
+  v2.setProperty('name', 'juan');
+  v2.setComputed('pagerank', 'rank', 5);
+  v3.setProperty('name', 'Rick');
 
   /* persist v1 */
   v1.persist().then((result) => {

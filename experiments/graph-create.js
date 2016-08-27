@@ -26,6 +26,8 @@ trueno.connect((s)=> {
 
   /* Adding properties and computed fields */
   g.setProperty('version', 1);
+
+  //Elastic search does not support this
   //g.setComputed('pagerank', 'top2', [[1, 4.32], [32, 4.01]]);
   g.setComputed('pagerank', 'average', 2.55);
   g.setComputed('pagerank', 'low', 1);
