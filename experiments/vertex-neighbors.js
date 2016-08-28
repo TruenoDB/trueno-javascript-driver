@@ -18,26 +18,46 @@ trueno.connect((s)=> {
 
   /* Create a new Graph */
   let g = trueno.Graph();
-  let v = g.addVertex();
-
   g.setId(1);
   g.setLabel("graphi");
-  v.setId(1);
+
+  let v = g.addVertex();
+
+  v.setId(4);
 
   /* Create a filter */
   let filter = g.filter()
-                .term('prop.name', 'peter');
+                .term('prop.name', 'bob');
 
   console.log('------------------------Neighbors-------------------------------');
 
   /* Get the out vertices, i.e outgoing neighbors */
   v._neighbors('v',filter,'out').then((vertices)=> {
+    console.log('Total outgoing neighbors: ', vertices.length);
+     vertices.forEach((v)=> {
+        console.log(v);
+            //vertices.push(new Vertex(v._source));
+          });
+  });
+
+  v.out('v',filter).then((vertices)=> {
+    vertices.forEach((v)=> {
+        console.log(v);
+    });
+  });
+
+/* Create a filter */
+  let filter2 = g.filter()
+                .term('prop.name', 'alice');
+  /* Get the out vertices, i.e incoming neighbors */
+  v._neighbors('v',filter2,'in').then((vertices)=> {
     console.log('Vertex neighbors: ', vertices);
   });
 
-    /* Get the out vertices, i.e incoming neighbors */
-  v._neighbors('v',filter,'in').then((vertices)=> {
-    console.log('Vertex neighbors: ', vertices);
+  v.in('v',filter2).then((vertices)=> {
+    vertices.forEach((v)=> {
+        console.log(v);
+    });
   });
 
 
