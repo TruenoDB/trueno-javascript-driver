@@ -22,8 +22,26 @@ trueno.connect((s)=> {
   g.setLabel("graphi");
 
   let v = g.addVertex();
-
   v.setId(4);
+
+  let alice = g.addVertex();
+  alice.setId(1);
+
+  let aura = g.addVertex();
+  aura.setId(2);
+
+  let alison = g.addVertex();
+  alison.setId(3);
+
+  let peter = g.addVertex();
+  peter.setId(4);
+
+  let cat = g.addVertex();
+  cat.setId(5);
+
+  let bob = g.addVertex();
+  bob.setId(6);
+
 
   /* Create a filter */
   let filter = g.filter()
@@ -32,34 +50,60 @@ trueno.connect((s)=> {
   console.log('------------------------Neighbors-------------------------------');
 
   /* Get the out vertices, i.e outgoing neighbors */
-  v._neighbors('v',filter,'out').then((vertices)=> {
-    console.log('Total outgoing neighbors: ', vertices.length);
-     vertices.forEach((v)=> {
-        console.log(v);
-            //vertices.push(new Vertex(v._source));
-          });
-  });
+  // v._neighbors('v',filter,'out').then((vertices)=> {
+  //   console.log('Total outgoing neighbors: ', vertices.length);
+  //    vertices.forEach((v)=> {
+  //       console.log(v);
+  //           //vertices.push(new Vertex(v._source));
+  //         });
+  // });
 
-  v.out('v',filter).then((vertices)=> {
-    vertices.forEach((v)=> {
-        console.log(v);
-    });
-  });
+  // v.out('v',filter).then((vertices)=> {
+  //   vertices.forEach((v)=> {
+  //       console.log(v);
+  //   });
+  // });
 
-/* Create a filter */
+  /* Create a filter */
+  // let filter2 = g.filter()
+  //               .term('prop.name', 'alice');
+  // /* Get the out vertices, i.e incoming neighbors */
+  // v._neighbors('v',filter2,'in').then((vertices)=> {
+  //   console.log('Total incoming neighbors: ', vertices.length);
+  //   vertices.forEach((v)=> {
+  //       console.log(v);
+  //           //vertices.push(new Vertex(v._source));
+  //         });
+  // });
+
+  // v.in('v',filter2).then((vertices)=> {
+  //   vertices.forEach((v)=> {
+  //       console.log(v);
+  //   });
+  // });
+
+  /* Example from Vertex.id = 1 [alice] */
+  // let filterAlice = g.filter()
+  //                    .term('prop.name', 'peter');
+  // alice.out('v',filterAlice).then((vertices)=> {
+  //   console.log("Outgoing vertices from alice");
+  //   vertices.forEach((v)=> {
+  //       console.log(v);
+  //   });
+  // });
+  /* Result is: Vertex.id = 4  | (1) -> (4)   | (alice) -> (peter) */
+
+
+  /* Example from Vertex.id = 2 [aura] */
   let filter2 = g.filter()
-                .term('prop.name', 'alice');
-  /* Get the out vertices, i.e incoming neighbors */
-  v._neighbors('v',filter2,'in').then((vertices)=> {
-    console.log('Vertex neighbors: ', vertices);
-  });
-
-  v.in('v',filter2).then((vertices)=> {
+                 .term('prop.name', 'aura');
+  alice.in('v', filter2).then((vertices)=> {
+    console.log("Incoming vertices to alice");
     vertices.forEach((v)=> {
         console.log(v);
     });
   });
-
+  /* Result is: Vertex.id = 3  | (2) -> (1)   | (aura) -> (alice) */
 
 }, (s)=> {
   console.log('disconnected', s.id);

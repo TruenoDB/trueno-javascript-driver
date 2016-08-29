@@ -82,13 +82,13 @@ trueno.connect((s)=> {
     e6.setLabel('knows');
     e7.setLabel('knows');
 
-    e1.setProperty('since', 10);
-    e2.setProperty('since', 10);
-    e3.setProperty('since', 10);
-    e4.setProperty('since', 10);
-    e5.setProperty('since', 10);
+    e1.setProperty('since', 20);
+    e2.setProperty('since', 15);
+    e3.setProperty('since', 25);
+    e4.setProperty('since', 20);
+    e5.setProperty('since', 30);
     e6.setProperty('since', 10);
-    e7.setProperty('since', 10);
+    e7.setProperty('since', 20);
 
    /* Persisting vertices */
 
@@ -177,8 +177,6 @@ trueno.connect((s)=> {
   }, (error) => {
     console.log("Error: Graph g creation failed", error);
   });
-
-  
 
 }, (s)=> {
   console.log('disconnected', s.id);
