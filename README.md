@@ -97,7 +97,7 @@ The following instructions are necessary:
 
 The instructions above will generate the following Graph **G**
 <p align="center">
-  <img height="400" src="https://raw.githubusercontent.com/TruenoDB/trueno-javascript-driver/master/images/neighbors-example.png" align="middle">
+  <img height="500" src="https://raw.githubusercontent.com/TruenoDB/trueno-javascript-driver/master/images/neighbors-example.png" align="middle">
 </p>
 
 ####Persisting vertices in the backend
@@ -119,3 +119,58 @@ The instructions above will generate the following Graph **G**
       console.log('Edge persistence error: ',error);
     });
 ```
+
+###Neighbors
+
+Formally, the neighbourhood of a vertex **v** in a graph **G** is the induced subgraph of G consisting of all vertices adjacent to **v**. We can look for adjacent vertices of **v** in TruenoDB with the following instructions:
+
+####Creating all vertices
+```js
+  /* Create a new Graph */
+  let g = trueno.Graph();
+  g.setId(1);
+  g.setLabel("graphi");
+
+  let v = g.addVertex();
+  v.setId(4);
+
+  let alice = g.addVertex();
+  alice.setId(1);
+
+  let aura = g.addVertex();
+  aura.setId(2);
+
+  let alison = g.addVertex();
+  alison.setId(3);
+
+  let peter = g.addVertex();
+  peter.setId(4);
+
+  let cat = g.addVertex();
+  cat.setId(5);
+
+  let bob = g.addVertex();
+  bob.setId(6);
+  
+```
+
+####Creating filter and finding neighbors of [alice]
+```js
+  /* Example from Vertex.id = 2 [aura] */
+  let filter2 = g.filter()
+                 .term('prop.name', 'aura');
+  alice.in('v', filter2).then((vertices)=> {
+    console.log("Incoming vertices to alice");
+    vertices.forEach((v)=> {
+        console.log(v);
+    });
+  });
+  /* Result is: Vertex.id = 3  | (2) -> (1)   | (aura) -> (alice) */
+```
+
+Our results will show the following:
+
+<p align="center">
+  <img height="500" src="https://raw.githubusercontent.com/TruenoDB/trueno-javascript-driver/master/images/neighbors-example-aura-alice.png" align="middle">
+</p>
+
