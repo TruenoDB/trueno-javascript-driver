@@ -12,7 +12,7 @@ In order to create a graph **G=(V,E)** with
 The following instructions will create the graph **G** shown in the figure.
 
 ####Creating the Graph **G**:
-```
+```js
   /* Create a new Graph */
   let g = trueno.Graph();
 
@@ -29,7 +29,7 @@ The following instructions will create the graph **G** shown in the figure.
 ```
 
 ####Creating the Vertices **V**:
-```
+```js
     let v1 = g.addVertex();
     let v2 = g.addVertex();
     let v3 = g.addVertex();
@@ -67,7 +67,7 @@ The following instructions will create the graph **G** shown in the figure.
 ```
 
 ####Creating the Edges **E**:
-```
+```js
     /* Edges */
     let e1 = g.addEdge(1,4);//alice -> peter
     let e2 = g.addEdge(2,1);//aura -> alice
