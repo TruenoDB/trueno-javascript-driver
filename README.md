@@ -9,7 +9,7 @@ In order to create a graph **G=(V,E)** with
 > 1. **Vertices** V = [alice, aura, alison, peter, cat, bob]
 > 2. **Edges** E = [alice->peter, aura->alice, aura->peter, aura->alison, alison->peter, peter->cat, peter->bob]
 
-The following instructions will create the graph **G** shown in the figure.
+The following instructions are necessary:
 
 ####Creating the Graph **G**:
 ```js
@@ -100,3 +100,4 @@ The instructions above will generate the following Graph **G**
   <img height="400" src="https://raw.githubusercontent.com/TruenoDB/trueno-javascript-driver/master/images/neighbors-example.png" align="middle">
 </p>
 
+####Persisting Graph in the backend, creating Index
