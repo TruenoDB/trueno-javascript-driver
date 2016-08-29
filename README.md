@@ -100,4 +100,22 @@ The instructions above will generate the following Graph **G**
   <img height="400" src="https://raw.githubusercontent.com/TruenoDB/trueno-javascript-driver/master/images/neighbors-example.png" align="middle">
 </p>
 
-####Persisting Graph in the backend, creating Index
+####Persisting vertices in the backend
+```js
+   /* persist v1 (alice) */
+    v1.persist().then((result) => {
+      console.log('Vertex successfully created with id: ', result);
+    }, (error) => {
+      console.log('Vertex persistence error: ',error);
+    });
+```
+
+####Persisting edges in the backend
+```js
+   /* persist e1 */
+    e1.persist().then((result) => {
+      console.log('Edge successfully created with id: ', e1.getId());
+    }, (error) => {
+      console.log('Edge persistence error: ',error);
+    });
+```
