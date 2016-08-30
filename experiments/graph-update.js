@@ -28,7 +28,7 @@ trueno.connect((s)=> {
   g.setProperty('version', 2);
   g.setProperty('type', 'Biological');
   g.setProperty('snapshot', new Date());
-  //g.setComputed('pagerank', 'top2', [[1, 4.32], [32, 4.01]]);
+  g.setComputed('pagerank', 'top2', [[1, 4.32], [32, 4.01]]);
   g.setComputed('pagerank', 'average', 15);
   g.setComputed('pagerank', 'low', 5);
 
