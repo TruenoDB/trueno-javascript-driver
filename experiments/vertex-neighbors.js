@@ -103,6 +103,13 @@ trueno.connect((s)=> {
         console.log(v);
     });
   });
+
+  aura.out('v').then((vertices)=> {
+    console.log("Outgoing vertices to aura");
+    vertices.forEach((v)=> {
+      console.log(v);
+    });
+  });
   /* Result is: Vertex.id = 3  | (2) -> (1)   | (aura) -> (alice) */
 
 }, (s)=> {
