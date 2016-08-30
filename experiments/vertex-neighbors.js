@@ -83,26 +83,43 @@ trueno.connect((s)=> {
   // });
 
   /* Example from Vertex.id = 1 [alice] */
-  // let filterAlice = g.filter()
-  //                    .term('prop.name', 'peter');
-  // alice.out('v',filterAlice).then((vertices)=> {
-  //   console.log("Outgoing vertices from alice");
-  //   vertices.forEach((v)=> {
-  //       console.log(v);
-  //   });
-  // });
-  /* Result is: Vertex.id = 4  | (1) -> (4)   | (alice) -> (peter) */
-
-
-  /* Example from Vertex.id = 2 [aura] */
-  let filter2 = g.filter()
-                 .term('prop.name', 'aura');
-  alice.in('v', filter2).then((vertices)=> {
-    console.log("Incoming vertices to alice");
+  let filterAlice = g.filter()
+                     .term('prop.name', 'peter');
+  //alice.out('v',filterAlice).then((vertices)=> {
+  alice.out('v').then((vertices)=> {
+    console.log("Outgoing vertices from alice");
     vertices.forEach((v)=> {
         console.log(v);
     });
   });
+  /* Result is: Vertex.id = 4  | (1) -> (4)   | (alice) -> (peter) */
+
+  peter.out('v').then((vertices)=> {
+    console.log("Outgoing vertices from peter");
+    vertices.forEach((v)=> {
+        console.log(v);
+    });
+  });
+  /* Result is: Vertex.id = 5,6 | (cat), (bob) */
+
+  peter.in('v').then((vertices)=> {
+    console.log("Incoming vertices to peter");
+    vertices.forEach((v)=> {
+        console.log(v);
+    });
+  });
+  /* Result is: Vertex.id = 1,2,3  | (alice), (aura), (alison) */
+
+
+  /* Example from Vertex.id = 2 [aura] */
+  // let filter2 = g.filter()
+  //                .term('prop.name', 'aura');
+  // alice.in('v', filter2).then((vertices)=> {
+  //   console.log("Incoming vertices to alice");
+  //   vertices.forEach((v)=> {
+  //       console.log(v);
+  //   });
+  // });
   /* Result is: Vertex.id = 3  | (2) -> (1)   | (aura) -> (alice) */
 
 }, (s)=> {
