@@ -110,16 +110,12 @@ trueno.connect((s)=> {
   });
   /* Result is: Vertex.id = 1,2,3  | (alice), (aura), (alison) */
 
-
-  /* Example from Vertex.id = 2 [aura] */
-  // let filter2 = g.filter()
-  //                .term('prop.name', 'aura');
-  // alice.in('v', filter2).then((vertices)=> {
-  //   console.log("Incoming vertices to alice");
-  //   vertices.forEach((v)=> {
-  //       console.log(v);
-  //   });
-  // });
+  aura.out('v').then((vertices)=> {
+    console.log("Outgoing vertices to aura");
+    vertices.forEach((v)=> {
+      console.log(v);
+    });
+  });
   /* Result is: Vertex.id = 3  | (2) -> (1)   | (aura) -> (alice) */
 
 }, (s)=> {

@@ -154,7 +154,7 @@ Formally, the neighbourhood of a vertex **v** in a graph **G** is the induced su
   
 ```
 
-####Creating filter and finding neighbors of [alice]
+####Creating filter and finding incoming neighbors of [alice]
 ```js
   /* Example from Vertex.id = 2 [aura] */
   let filter2 = g.filter()
@@ -174,3 +174,22 @@ Our results will show the following:
   <img height="500" src="https://raw.githubusercontent.com/TruenoDB/trueno-javascript-driver/master/images/neighbors-example-aura-alice.png" align="middle">
 </p>
 
+####Creating filter and finding outgoing neighbors of [alice]
+```js
+  /* Example from Vertex.id = 1 [alice] */
+  let filterAlice = g.filter()
+                     .term('prop.name', 'peter');
+  alice.out('v',filterAlice).then((vertices)=> {
+    console.log("Outgoing vertices from alice");
+    vertices.forEach((v)=> {
+        console.log(v);
+    });
+  });
+  /* Result is: Vertex.id = 4  | (1) -> (4)   | (alice) -> (peter) */
+```
+
+Our results will show the following:
+
+<p align="center">
+  <img height="500" src="https://raw.githubusercontent.com/TruenoDB/trueno-javascript-driver/master/images/neighbors-example-alice-peter.png" align="middle">
+</p>

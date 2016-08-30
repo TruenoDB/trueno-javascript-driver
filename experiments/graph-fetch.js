@@ -43,6 +43,12 @@ trueno.connect((s)=> {
     console.log("Error: Could not fetch Graph g info", error);
   });
 
+  g.fetch('e').then((result) => {
+    console.log("All edges", result);
+  }, (error) => {
+    console.log("Error fetching all edges", error);
+  });
+
 }, (s)=> {
   console.log('disconnected', s.id);
 })
