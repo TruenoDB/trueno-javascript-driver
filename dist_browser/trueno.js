@@ -200,10 +200,14 @@
 	        msg.forEach((c)=> {
 	          switch (c._type) {
 	            case 'v':
-	              vertices.push(new Vertex(c._source));
+	              var v = new Vertex(c._source);
+	              v.setId(c._id);
+	              vertices.push(v);
 	              break;
 	            case 'e':
-	              edges.push(new Edge(c._source));
+	              var e = new Edge(c._source);
+	              e.setId(c._id);
+	              edges.push(e);
 	              break;
 	          }
 	        });
@@ -11257,6 +11261,7 @@
 	const Promise = __webpack_require__(6);
 	// const Joi = require('joi');
 	const Filter = __webpack_require__(32);
+	const Edge = __webpack_require__(34);
 
 	/* validation schema constant */
 	// const _schema = Joi.object().keys({
@@ -11382,11 +11387,19 @@
 	    /* return promise with the async operation */
 	    return new Promise((resolve, reject)=> {
 	      self.__parentGraph.__conn._rpc.call(apiFunc, msg).then((msg)=> {
+	        if (cmp == 'v') {
 	          let vertices = [];
 	          msg.forEach((v)=> {
 	            vertices.push(new Vertex(v._source));
 	          });
 	          resolve(vertices);
+	        } else if (cmp == 'e') {
+	          let edges = [];
+	          msg.forEach((e)=> {
+	            edges.push(new Edge(e._source));
+	          });
+	          resolve(edges);
+	        }
 	      }, (err)=> {
 	        reject(err);
 	      });
