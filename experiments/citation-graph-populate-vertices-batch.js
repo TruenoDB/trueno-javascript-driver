@@ -17,6 +17,7 @@ let trueno = new Trueno({host: 'http://localhost', port: 8000, debug: false});
 trueno.connect((s)=> {
 
 
+  const batchSize  = 300;
 
   /* Create a new Graph */
   let g = trueno.Graph();
@@ -28,31 +29,44 @@ trueno.connect((s)=> {
   let total = vQueue.length, current = 0;
 
   /* Insertion function */
-  function insertVertex(vkey){
-    let v = g.addVertex();
-    v.setId(parseInt(vkey));
-    v.setLabel('paper');
-    v.setProperty("title", vertices[vkey].title);
-    v.persist().then((result) => {
-      console.log("Vertex " + vkey + " created. ",(current++)/total);
+  function insertVertex(arr) {
+
+    /* persist everything into a batch */
+    g.openBatch();
+
+    /* Persist all vertices */
+    arr.forEach((vkey)=> {
+      let v = g.addVertex();
+      v.setId(parseInt(vkey));
+      v.setLabel('paper');
+      v.setProperty("title", vertices[vkey].title);
+      /* persist in batch */
+      v.persist();
+      current++;
+    });
+
+    /* insert batch */
+    g.closeBatch().then((result) => {
+      console.log("Vertices batch created.", current / total);
       /* Continue inserting */
-      if(vQueue.length){
-        insertVertex(vQueue.shift());
+      if (vQueue.length) {
+        insertVertex(vQueue.splice(0, batchSize));
       }else{
         process.exit();
       }
     }, (error) => {
-      console.log("Error: Vertex " + vkey + " creation failed", error, (current++)/total);
+      console.log("Error: Vetices batch creation failed.", error, current / total);
       /* Continue inserting */
-      if(vQueue.length){
-        insertVertex(vQueue.shift());
+      if (vQueue.length) {
+        insertVertex(vQueue.splice(0, batchSize));
       }else{
         process.exit();
       }
     });
   }
+
   /* Initiating vertex insertion */
-  insertVertex(vQueue.shift());
+  insertVertex(vQueue.splice(0, batchSize));
 
 }, (s)=> {
   console.log('disconnected', s.id);

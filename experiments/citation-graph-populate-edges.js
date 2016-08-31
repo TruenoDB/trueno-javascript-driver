@@ -39,20 +39,25 @@ trueno.connect((s)=> {
         /* Continue inserting */
         if (eQueue.length) {
           insertEdge(eQueue.shift());
+        }else{
+          process.exit();
         }
       }, (error) => {
         console.log("Error " + edgePair[0] + " -> ", edgePair[1] + " cannot be created. ", error, (current++) / total);
         /* Continue inserting */
         if (eQueue.length) {
           insertEdge(eQueue.shift());
+        }else{
+          process.exit();
         }
       });
     } else {
-      console.log("Some of the vertices are not present, skipping..");
       current++
       /* Continue inserting */
       if (eQueue.length) {
         insertEdge(eQueue.shift());
+      }else{
+        process.exit();
       }
     }
   }
