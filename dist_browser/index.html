@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="trueno.js"></script>
+</head>
+<body>
+
+</body>
+<script>
+
+    /* Instantiate connection */
+
+    let trueno = new Trueno({host: 'http://localhost', port: 8000, debug: false});
+
+    trueno.connect((s)=> {
+
+        console.log('connected', s.id);
+        console.log('------------------------Executing SQL Query-------------------------------');
+
+        trueno.sql("SELECT * FROM citations where target = 9412200 or id = 9207078").then((result) => {
+            console.log("Results from query", result);
+        }, (error) => {
+            console.log("Error: Query failed", error);
+        });
+
+    }, (s)=> {
+        console.log('disconnected', s.id);
+    })
+
+
+</script>
+</html>

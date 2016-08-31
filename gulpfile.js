@@ -72,7 +72,7 @@ gulp.task('prepublish', ['nsp', 'babel']);
 gulp.task('default', ['static', 'test']);
 
 gulp.task('webpack', function () {
-  return gulp.src('lib/index.js')
+  return gulp.src('dist_browser/app.js')
   .pipe(webpack({
     output: {
       filename: 'trueno.js',
