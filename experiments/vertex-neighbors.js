@@ -44,8 +44,8 @@ trueno.connect((s)=> {
 
 
   /* Create a filter */
-  let filter = g.filter()
-                .term('prop.name', 'bob');
+  // let filter = g.filter()
+  //               .term('prop.name', 'bob');
 
   console.log('------------------------Neighbors-------------------------------');
 
@@ -83,40 +83,67 @@ trueno.connect((s)=> {
   // });
 
   /* Example from Vertex.id = 1 [alice] */
-  let filterAlice = g.filter()
-                     .term('prop.name', 'peter');
-  //alice.out('v',filterAlice).then((vertices)=> {
-  alice.out('v').then((vertices)=> {
-    console.log("Outgoing vertices from alice");
-    vertices.forEach((v)=> {
-        console.log(v);
-    });
-  });
-  /* Result is: Vertex.id = 4  | (1) -> (4)   | (alice) -> (peter) */
+  // let filterAlice = g.filter()
+  //                    .term('prop.name', 'peter');
+  // //alice.out('v',filterAlice).then((vertices)=> {
+  // alice.out('v').then((vertices)=> {
+  //   console.log("Outgoing vertices from alice");
+  //   vertices.forEach((v)=> {
+  //       console.log(v);
+  //   });
+  // });
+  // /* Result is: Vertex.id = 4  | (1) -> (4)   | (alice) -> (peter) */
 
-  peter.out('v').then((vertices)=> {
-    console.log("Outgoing vertices from peter");
-    vertices.forEach((v)=> {
-        console.log(v);
-    });
-  });
-  /* Result is: Vertex.id = 5,6 | (cat), (bob) */
+  // peter.out('v').then((vertices)=> {
+  //   console.log("Outgoing vertices from peter");
+  //   vertices.forEach((v)=> {
+  //       console.log(v);
+  //   });
+  // });
+  // /* Result is: Vertex.id = 5,6 | (cat), (bob) */
 
-  peter.in('v').then((vertices)=> {
-    console.log("Incoming vertices to peter");
-    vertices.forEach((v)=> {
-        console.log(v);
-    });
-  });
-  /* Result is: Vertex.id = 1,2,3  | (alice), (aura), (alison) */
+  // peter.in('v').then((vertices)=> {
+  //   console.log("Incoming vertices to peter");
+  //   vertices.forEach((v)=> {
+  //       console.log(v);
+  //   });
+  // });
+  // /* Result is: Vertex.id = 1,2,3  | (alice), (aura), (alison) */
 
-  aura.out('v').then((vertices)=> {
-    console.log("Outgoing vertices to aura");
-    vertices.forEach((v)=> {
-      console.log(v);
-    });
-  });
+  // aura.out('v').then((vertices)=> {
+  //   console.log("Outgoing vertices from aura");
+  //   vertices.forEach((v)=> {
+  //     console.log(v);
+  //   });
+  // });
   /* Result is: Vertex.id = 3  | (2) -> (1)   | (aura) -> (alice) */
+
+  // peter.out('e').then((edges)=> {
+  //   console.log("Outgoing edges from peter");
+  //   edges.forEach((e)=> {
+  //       console.log(e);
+  //   });
+  // });
+
+  /******** Neighbors using Edges *****************/
+
+  let filter = g.filter()
+               .term('prop.since', 20);
+
+    peter.out('e', filter).then((edges)=> {
+    console.log("Outgoing edges to peter");
+      edges.forEach((e)=> {
+          console.log(e);
+      });
+    });
+
+    /* Incoming Edges with the filter */
+    peter.in('e', filter).then((edges)=> {
+    console.log("Incoming edges to peter");
+    edges.forEach((e)=> {
+        console.log(e);
+    });
+  });
 
 }, (s)=> {
   console.log('disconnected', s.id);
