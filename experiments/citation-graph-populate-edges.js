@@ -29,9 +29,6 @@ trueno.connect((s)=> {
 
   /* Insertion function */
   function insertEdge(edgePair) {
-    /* if both vertices are present insert */
-    if (vertices[edgePair[0] + ''] && vertices[edgePair[1] + '']) {
-
       let e = g.addEdge(edgePair[0], edgePair[1]);
       e.setLabel('cited');
       e.persist().then((result) => {
@@ -39,8 +36,6 @@ trueno.connect((s)=> {
         /* Continue inserting */
         if (eQueue.length) {
           insertEdge(eQueue.shift());
-        }else{
-          process.exit();
         }
       }, (error) => {
         console.log("Error " + edgePair[0] + " -> ", edgePair[1] + " cannot be created. ", error, (current++) / total);
@@ -51,15 +46,6 @@ trueno.connect((s)=> {
           process.exit();
         }
       });
-    } else {
-      current++
-      /* Continue inserting */
-      if (eQueue.length) {
-        insertEdge(eQueue.shift());
-      }else{
-        process.exit();
-      }
-    }
   }
 
   /* Initiating vertex insertion */

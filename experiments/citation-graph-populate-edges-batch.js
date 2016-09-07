@@ -16,7 +16,7 @@ let trueno = new Trueno({host: 'http://localhost', port: 8000, debug: false});
 
 trueno.connect((s)=> {
 
-  const batchSize  = 300;
+  const batchSize = 300;
 
   /* Create a new Graph */
   let g = trueno.Graph();
@@ -35,15 +35,10 @@ trueno.connect((s)=> {
 
     /* Persist all vertices */
     arr.forEach((edgePair)=> {
-      /* if both vertices are present insert */
-      if (vertices[edgePair[0] + ''] && vertices[edgePair[1] + '']) {
-        let e = g.addEdge(edgePair[0], edgePair[1]);
-        e.setLabel('cited');
-        e.persist();
-        current++;
-      } else {
-        current++
-      }
+      let e = g.addEdge(edgePair[0], edgePair[1]);
+      e.setLabel('cited');
+      e.persist();
+      current++;
     });
 
     /* insert batch */
@@ -52,7 +47,7 @@ trueno.connect((s)=> {
       /* Continue inserting */
       if (eQueue.length) {
         insertEdge(eQueue.splice(0, batchSize));
-      }else{
+      } else {
         process.exit();
       }
     }, (error) => {
@@ -60,7 +55,7 @@ trueno.connect((s)=> {
       /* Continue inserting */
       if (eQueue.length) {
         insertEdge(eQueue.splice(0, batchSize));
-      }else{
+      } else {
         process.exit();
       }
     });
