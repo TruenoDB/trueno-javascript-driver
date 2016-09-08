@@ -83,15 +83,15 @@ trueno.connect((s)=> {
   // });
 
   /* Example from Vertex.id = 1 [alice] */
-  // let filterAlice = g.filter()
-  //                    .term('prop.name', 'peter');
-  // //alice.out('v',filterAlice).then((vertices)=> {
-  // alice.out('v').then((vertices)=> {
-  //   console.log("Outgoing vertices from alice");
-  //   vertices.forEach((v)=> {
-  //       console.log(v);
-  //   });
-  // });
+  let filterAlice = g.filter()
+                     .term('prop.name', 'peter');
+  //alice.out('v',filterAlice).then((vertices)=> {
+  alice.out('v').then((vertices)=> {
+    console.log("Outgoing vertices from alice");
+    vertices.forEach((v)=> {
+        console.log(v);
+    });
+  });
   // /* Result is: Vertex.id = 4  | (1) -> (4)   | (alice) -> (peter) */
 
   // peter.out('v').then((vertices)=> {
@@ -118,6 +118,11 @@ trueno.connect((s)=> {
   // });
   /* Result is: Vertex.id = 3  | (2) -> (1)   | (aura) -> (alice) */
 
+  
+
+  /******** Neighbors using Edges *****************/
+
+  /* Match All of them / no filter */
   // peter.out('e').then((edges)=> {
   //   console.log("Outgoing edges from peter");
   //   edges.forEach((e)=> {
@@ -125,25 +130,23 @@ trueno.connect((s)=> {
   //   });
   // });
 
-  /******** Neighbors using Edges *****************/
+  //   let filter = g.filter()
+  //              .term('prop.since', 20);
 
-  let filter = g.filter()
-               .term('prop.since', 20);
+  //   peter.out('e', filter).then((edges)=> {
+  //   console.log("Outgoing edges to peter");
+  //     edges.forEach((e)=> {
+  //         console.log(e);
+  //     });
+  //   });
 
-    peter.out('e', filter).then((edges)=> {
-    console.log("Outgoing edges to peter");
-      edges.forEach((e)=> {
-          console.log(e);
-      });
-    });
-
-    /* Incoming Edges with the filter */
-    peter.in('e', filter).then((edges)=> {
-    console.log("Incoming edges to peter");
-    edges.forEach((e)=> {
-        console.log(e);
-    });
-  });
+  //   /* Incoming Edges with the filter */
+  //   peter.in('e', filter).then((edges)=> {
+  //   console.log("Incoming edges to peter");
+  //   edges.forEach((e)=> {
+  //       console.log(e);
+  //   });
+  // });
 
 }, (s)=> {
   console.log('disconnected', s.id);
