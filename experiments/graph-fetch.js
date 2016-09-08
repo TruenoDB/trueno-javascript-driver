@@ -27,7 +27,7 @@ trueno.connect((s)=> {
 
                 /* Create a filter */
   let filter2 = g.filter()
-                  .term('prop.name', 'pedro');
+                  .term('prop.name', 'aura');
                   
 
   /* persist g */
@@ -38,9 +38,9 @@ trueno.connect((s)=> {
   });
 
   g.fetch('v',filter2).then((result) => {
-    console.log("Info from Graph g fetched", result);
+    console.log("Info from Graph g component v fetched", result);
   }, (error) => {
-    console.log("Error: Could not fetch Graph g info", error);
+    console.log("Error: Could not fetch Graph g component v info", error);
   });
 
   g.fetch('e').then((result) => {

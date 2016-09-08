@@ -24,7 +24,7 @@ trueno.connect((s)=> {
 
                 /* Create a filter */
   let filter = g.filter()
-                  .term('prop.name', 'pepe');
+                  .term('prop.name', 'aura');
                   
   g.count('v',filter).then((result) => {
     console.log("Info from Graph g counted", result);
