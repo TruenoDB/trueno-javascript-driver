@@ -193,3 +193,34 @@ Our results will show the following:
 <p align="center">
   <img height="500" src="https://raw.githubusercontent.com/TruenoDB/trueno-javascript-driver/master/images/neighbors-example-alice-peter.png" align="middle">
 </p>
+
+
+###Compute
+
+####Deploying jobs in the Spark-Cluster
+```js
+  /* Create a new Graph */
+  let g = trueno.Graph();
+  g.setId(1);
+  g.setLabel("graphi");
+
+  let c = g.getCompute(Enums.algorithmType.DEPENDENCIES);
+
+  /* Get the compute of the algorithm */
+  c.deploy().then((jobId)=> {
+    console.log('JobId: ', jobId);
+
+     var x = setInterval(function () {
+       c.jobStatus(jobId).then((status)=> {
+          console.log('Job Status: ', status);
+          if (status == "FINISHED") {
+             c.jobResult(jobId).then((result)=> {
+               console.log('Job Result: ', result);
+               clearInterval(x);
+             });
+          }
+       });
+    }, 10000);
+
+  });
+```
