@@ -195,9 +195,9 @@ Our results will show the following:
 </p>
 
 
-###Compute
+##Compute
 
-####Deploying jobs in the Spark-Cluster
+###Deploying jobs in the Spark-Cluster
 ```js
   /* Create a new Graph */
   let g = trueno.Graph();
