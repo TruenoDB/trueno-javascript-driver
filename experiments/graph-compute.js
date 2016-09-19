@@ -30,10 +30,18 @@ trueno.connect((s)=> {
   c.deploy().then((jobId)=> {
     console.log('JobId: ', jobId);
 
-    c.jobStatus(jobId).then((status)=> {
-      console.log('Job Status: ', status);
-    });
-      
+     var x = setInterval(function () {
+       c.jobStatus(jobId).then((status)=> {
+          console.log('Job Status: ', status);
+          if (status == "FINISHED") {
+             c.jobResult(jobId).then((result)=> {
+               console.log('Job Result: ', result);
+               clearInterval(x);
+             });
+          }
+       });
+    }, 10000);
+
   });
 
 }, (s)=> {
