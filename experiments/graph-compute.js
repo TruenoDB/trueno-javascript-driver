@@ -29,6 +29,11 @@ trueno.connect((s)=> {
   /* Get the compute of the algorithm */
   c.deploy().then((jobId)=> {
     console.log('JobId: ', jobId);
+
+    c.jobStatus(jobId).then((status)=> {
+      console.log('Job Status: ', status);
+    });
+      
   });
 
 }, (s)=> {
