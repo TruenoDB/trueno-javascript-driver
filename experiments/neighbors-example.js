@@ -10,7 +10,7 @@ const Trueno = require('../lib/trueno');
 
 /* Instantiate connection */
 
-let trueno = new Trueno({host: 'http://localhost', port: 8000, debug: false});
+let trueno = new Trueno({host: 'http://localhost', port: 8000, debug: true});
 
 trueno.connect((s)=> {
 
@@ -72,6 +72,24 @@ trueno.connect((s)=> {
     let e5 = g.addEdge(3,4);//alison -> peter
     let e6 = g.addEdge(4,5);//peter -> cat
     let e7 = g.addEdge(4,6);//peter -> bob
+
+    /* Set edges IDs */
+    e1.setId(1);
+    e2.setId(2);
+    e3.setId(3);
+    e4.setId(4);
+    e5.setId(5);
+    e6.setId(6);
+    e7.setId(7);
+
+
+    e1.setLabel('knows');
+    e2.setLabel('knows');
+    e3.setLabel('knows');
+    e4.setLabel('knows');
+    e5.setLabel('knows');
+    e6.setLabel('knows');
+    e7.setLabel('knows');
 
     /* Adding properties and labels */
     e1.setLabel('knows');

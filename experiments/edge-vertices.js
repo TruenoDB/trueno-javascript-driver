@@ -10,7 +10,7 @@ const Trueno = require('../lib/trueno');
 
 /* Instantiate connection */
 
-let trueno = new Trueno({host: 'http://localhost', port: 8000, debug: true});
+let trueno = new Trueno({host: 'localhost', port: 8000, debug: true});
 
 trueno.connect((s)=> {
 
