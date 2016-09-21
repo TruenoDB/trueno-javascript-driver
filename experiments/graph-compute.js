@@ -26,14 +26,15 @@ trueno.connect((s)=> {
   console.log('------------------------Compute-------------------------------');
   let c = g.getCompute();
 
+   // vertices: {string: "vertices"},
+   //    edges:    {string: "edges"},
+   //    vertexId: {string: "id"},
+   //    source:   {string: "source"},
+   //    target:   {string: "target"},
+
   c.setAlgorithm(Enums.algorithmType.PAGE_RANK);
   let parameters = {
       schema:   {string: "citations"},
-      vertices: {string: "vertices"},
-      edges:    {string: "edges"},
-      vertexId: {string: "id"},
-      source:   {string: "source"},
-      target:   {string: "target"},
       TOL:      {string: 0.001},
       alpha:    {string: 0.85}
   };
