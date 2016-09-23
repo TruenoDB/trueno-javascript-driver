@@ -9,9 +9,9 @@
     "url": "victorsantos.net"
   },
   "files": [
-    "dist"
+    "lib"
   ],
-  "main": "dist/trueno.js",
+  "main": "lib/trueno.js",
   "keywords": [
     "truenoDB",
     "javascript",
