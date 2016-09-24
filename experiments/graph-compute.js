@@ -1,7 +1,7 @@
 /**
  * Created by: Servio on 2016.09.17.
  * Source: .js
- * Author: Servio
+ * Author: Servio Palacios
  * Description:
  *
  */
@@ -20,17 +20,10 @@ trueno.connect((s)=> {
   /* Create a new Graph */
   let g = trueno.Graph();
   g.setId(1);
-  g.setLabel("graphi");
-
+  g.setLabel("citations");
 
   console.log('------------------------Compute-------------------------------');
   let c = g.getCompute();
-
-   // vertices: {string: "vertices"},
-   //    edges:    {string: "edges"},
-   //    vertexId: {string: "id"},
-   //    source:   {string: "source"},
-   //    target:   {string: "target"},
 
   c.setAlgorithm(Enums.algorithmType.PAGE_RANK);
   let parameters = {
@@ -47,7 +40,7 @@ trueno.connect((s)=> {
      var x = setInterval(function () {
        c.jobStatus(jobId).then((status)=> {
           console.log('Job Status: ', status);
-          if (status == "FINISHED") {
+          if (status == Enums.jobStatus.FINISHED) {
              c.jobResult(jobId).then((result)=> {
                console.log('Job Result: ', result);
                clearInterval(x);
