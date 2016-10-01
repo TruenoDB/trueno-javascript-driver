@@ -21,7 +21,7 @@ trueno.connect((s)=> {
   let g = trueno.Graph();
 
   /* Set label: very important */
-  g.setLabel('graphi');
+  g.setLabel('graphii');
 
   /* Adding properties and computed fields */
   g.setProperty('version', 1);

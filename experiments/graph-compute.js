@@ -20,14 +20,14 @@ trueno.connect((s)=> {
   /* Create a new Graph */
   let g = trueno.Graph();
   g.setId(1);
-  g.setLabel("citations");
+  g.setLabel("graphii");
 
   console.log('------------------------Compute-------------------------------');
   let c = g.getCompute();
 
   c.setAlgorithm(Enums.algorithmType.PAGE_RANK);
   let parameters = {
-      schema:   {string: "citations"},
+      schema:   {string: "graphii"},
       TOL:      {string: 0.001},
       alpha:    {string: 0.85}
   };
