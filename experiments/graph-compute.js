@@ -29,7 +29,8 @@ trueno.connect((s)=> {
   let parameters = {
       schema:   {string: "graphii"},
       TOL:      {string: 0.001},
-      alpha:    {string: 0.85}
+      alpha:    {string: 0.85},
+      persisted: {string: "false"}
   };
   c.setParameters(parameters);
 
