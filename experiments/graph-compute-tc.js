@@ -25,12 +25,12 @@ trueno.connect((s)=> {
   console.log('------------------------Compute-------------------------------');
   let c = g.getCompute();
 
-  c.setAlgorithm(Enums.algorithmType.PAGE_RANK);
+  c.setAlgorithm(Enums.algorithmType.TRIANGLE_COUNTING);
   let parameters = {
       schema:         {string: "graphii"},
-      TOL:            {string: 0.001},
-      alpha:          {string: 0.85},
-      persisted:      {string: "true"},
+      persisted:      {string: "false"},
+      alpha:          {string: "0.85"},
+      TOL:            {string: "0.001"},
       persistedTable: {string: "pr11"}
   };
   c.setParameters(parameters);
