@@ -11,7 +11,7 @@ const Trueno = require('../lib/trueno');
 
 /* Instantiate connection */
 // let trueno = new Trueno({host: 'http://localhost', port: 8000, debug: false});
-let trueno = new Trueno({host: 'http://mc18.cs.purdue.edu', port: 8000, debug: false});
+let trueno = new Trueno({host: 'http://localhost', port: 8000, debug: false});
 
 trueno.connect((s)=> {
 
@@ -22,7 +22,7 @@ trueno.connect((s)=> {
 
     /* vertices */
     let jupiter = g.addVertex();
-    jupiter.setId(4);
+    jupiter.setId(5);
 
     jupiter.in('v').then((result) => {
       console.log('vertices in  <-- ', result);
