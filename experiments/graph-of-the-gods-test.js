@@ -22,7 +22,7 @@ trueno.connect((s)=> {
 
     /* vertices */
     let jupiter = g.addVertex();
-    jupiter.setId(4);
+    jupiter.setId(5);
 
       /* Create a filter */
   let filter = g.filter()
