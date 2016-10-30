@@ -11415,7 +11415,6 @@
 	const Message = __webpack_require__(2);
 	const Component = __webpack_require__(4);
 	const Promise = __webpack_require__(5);
-	var fs = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"fs\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	//const Filter = require('./filter');
 
