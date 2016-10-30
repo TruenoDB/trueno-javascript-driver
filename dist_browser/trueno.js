@@ -914,12 +914,12 @@
 
 	  _validateGraphLabel() {
 	    /* If label is not present throw error */
-	    if (!this.__parentGraph.getLabel()) {
-	      throw new Error('Graph label is required');
-	    }
+	    if (!this.__parentGraph.getLabel() && this.__type != 'g') {
 
-	    /* If label is not present throw error */
-	    if (this.__type == 'g') {
+	      throw new Error('Graph label is required');
+
+	    }else if(this.__type == 'g') {
+
 	      this.setId(this.getLabel());
 	    }
 	  }
