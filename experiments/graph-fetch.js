@@ -31,23 +31,23 @@ trueno.connect((s)=> {
                   
 
   /* persist g */
-  g.fetch('g',filter).then((result) => {
+  g.fetch('g').then((result) => {
     console.log("Info from Graph g fetched", result);
   }, (error) => {
     console.log("Error: Could not fetch Graph g info", error);
   });
 
-  g.fetch('v',filter2).then((result) => {
-    console.log("Info from Graph g component v fetched", result);
-  }, (error) => {
-    console.log("Error: Could not fetch Graph g component v info", error);
-  });
-
-  g.fetch('e').then((result) => {
-    console.log("All edges", result);
-  }, (error) => {
-    console.log("Error fetching all edges", error);
-  });
+  //g.fetch('v',filter2).then((result) => {
+  //  console.log("Info from Graph g component v fetched", result);
+  //}, (error) => {
+  //  console.log("Error: Could not fetch Graph g component v info", error);
+  //});
+  //
+  //g.fetch('e').then((result) => {
+  //  console.log("All edges", result);
+  //}, (error) => {
+  //  console.log("Error fetching all edges", error);
+  //});
 
 }, (s)=> {
   console.log('disconnected', s.id);

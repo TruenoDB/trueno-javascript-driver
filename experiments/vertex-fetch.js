@@ -19,9 +19,6 @@ trueno.connect((s)=> {
   /* Create a new Graph */
   let g = trueno.Graph();
 
-  /* Set label: very important */
-  g.setLabel('titan');
-
   // let v1 = g.addVertex();
   // v1.setId(1);
   // v1.setLabel('graphi');
