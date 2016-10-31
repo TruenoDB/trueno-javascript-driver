@@ -19,7 +19,7 @@ trueno.connect((s)=> {
   /* Create a new Graph */
   let g = trueno.Graph();
   g.setId(1);
-  g.setLabel("db1029");
+  g.setLabel("graphii");
 
   let v = g.addVertex();
   v.setId(4);
