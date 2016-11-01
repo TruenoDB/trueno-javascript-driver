@@ -21,7 +21,7 @@ trueno.connect((s)=> {
   let g = trueno.Graph();
 
   /* Set label: very important */
-  g.setLabel('graphii');
+  g.setLabel('graphi');
 
   /* Adding properties and computed fields */
   g.setProperty('version', 1);
@@ -58,7 +58,7 @@ trueno.connect((s)=> {
     v4.setProperty('name', 'peter');
     v4.setProperty('age', '20');
 
-    v5.setProperty('name', 'cat');
+    v5.setProperty('name', 'black cat');
     v5.setProperty('age', '65');
 
     v6.setProperty('name', 'bob');

@@ -31,7 +31,7 @@ trueno.connect((s)=> {
       TOL:            {string: 0.001},
       alpha:          {string: 0.85},
       persisted:      {string: "true"},
-      persistedTable: {string: "pr11"}
+      persistedTable: {string: "vertices"}
   };
   c.setParameters(parameters);
 

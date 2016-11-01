@@ -11,7 +11,7 @@ const Trueno = require('../lib/trueno');
 
 /* Instantiate connection */
 // let trueno = new Trueno({host: 'http://localhost', port: 8000, debug: false});
-let trueno = new Trueno({host: 'http://mc18.cs.purdue.edu', port: 8000, debug: false});
+let trueno = new Trueno({host: 'http://localhost', port: 8000, debug: false});
 
 trueno.connect((s)=> {
 
@@ -22,23 +22,30 @@ trueno.connect((s)=> {
 
     /* vertices */
     let jupiter = g.addVertex();
-    jupiter.setId(4);
+    jupiter.setId(5);
 
-    jupiter.in('v').then((result) => {
+      /* Create a filter */
+  let filter = g.filter()
+            .range('prop.age', 'lt', 4001)
+
+    let filter2 = g.filter()
+    .term('label', 'brother');
+
+    jupiter.in('v', filter, filter2).then((result) => {
       console.log('vertices in  <-- ', result);
     });
 
-    jupiter.out('v').then((result) => {
-      console.log('vertices out --> ', result)
-    });
+    // jupiter.out('v').then((result) => {
+    //   console.log('vertices out --> ', result)
+    // });
 
-    jupiter.in('e').then((result) => {
-      console.log('edges in    <-- ', result);
-    });
+    // jupiter.in('e').then((result) => {
+    //   console.log('edges in    <-- ', result);
+    // });
 
-    jupiter.out('e').then((result) => {
-      console.log('edges out    --> ', result)
-    });
+    // jupiter.out('e').then((result) => {
+    //   console.log('edges out    --> ', result)
+    // });
 
   });
 

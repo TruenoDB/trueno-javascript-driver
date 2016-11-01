@@ -19,7 +19,7 @@ trueno.connect((s)=> {
   /* Create a new Graph */
   let g = trueno.Graph();
   g.setId(1);
-  g.setLabel("graphi");
+  g.setLabel("graphii");
 
   let v = g.addVertex();
   v.setId(4);
@@ -94,28 +94,28 @@ trueno.connect((s)=> {
   });
   // /* Result is: Vertex.id = 4  | (1) -> (4)   | (alice) -> (peter) */
 
-  // peter.out('v').then((vertices)=> {
-  //   console.log("Outgoing vertices from peter");
-  //   vertices.forEach((v)=> {
-  //       console.log(v);
-  //   });
-  // });
-  // /* Result is: Vertex.id = 5,6 | (cat), (bob) */
+  peter.out('v').then((vertices)=> {
+    console.log("Outgoing vertices from peter");
+    vertices.forEach((v)=> {
+        console.log(v);
+    });
+  });
+  /* Result is: Vertex.id = 5,6 | (cat), (bob) */
 
-  // peter.in('v').then((vertices)=> {
-  //   console.log("Incoming vertices to peter");
-  //   vertices.forEach((v)=> {
-  //       console.log(v);
-  //   });
-  // });
-  // /* Result is: Vertex.id = 1,2,3  | (alice), (aura), (alison) */
+  peter.in('v').then((vertices)=> {
+    console.log("Incoming vertices to peter");
+    vertices.forEach((v)=> {
+        console.log(v);
+    });
+  });
+  /* Result is: Vertex.id = 1,2,3  | (alice), (aura), (alison) */
 
-  // aura.out('v').then((vertices)=> {
-  //   console.log("Outgoing vertices from aura");
-  //   vertices.forEach((v)=> {
-  //     console.log(v);
-  //   });
-  // });
+  aura.out('v').then((vertices)=> {
+    console.log("Outgoing vertices from aura");
+    vertices.forEach((v)=> {
+      console.log(v);
+    });
+  });
   /* Result is: Vertex.id = 3  | (2) -> (1)   | (aura) -> (alice) */
 
   
@@ -123,12 +123,12 @@ trueno.connect((s)=> {
   /******** Neighbors using Edges *****************/
 
   /* Match All of them / no filter */
-  // peter.out('e').then((edges)=> {
-  //   console.log("Outgoing edges from peter");
-  //   edges.forEach((e)=> {
-  //       console.log(e);
-  //   });
-  // });
+  peter.out('e').then((edges)=> {
+    console.log("Outgoing edges from peter");
+    edges.forEach((e)=> {
+        console.log(e);
+    });
+  });
 
   //   let filter = g.filter()
   //              .term('prop.since', 20);

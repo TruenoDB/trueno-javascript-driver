@@ -19,16 +19,13 @@ trueno.connect((s)=> {
   /* Create a new Graph */
   let g = trueno.Graph();
 
-  /* Set label: very important */
-  g.setLabel('graphi');
-
-  let v1 = g.addVertex();
-  v1.setId(1);
-  v1.setLabel('graphi');
+  // let v1 = g.addVertex();
+  // v1.setId(1);
+  // v1.setLabel('graphi');
 
   /* Create a filter */
-  let filter = g.filter()
-                  .term('prop.name', 'pepe');
+  // let filter = g.filter()
+  //                 .term('prop.name', 'pepe');
                   /*.range('prop.age', 'gt', 8)
                   .range('prop.age', 'lt', 22)
                   .exist('prop.salary')
@@ -40,7 +37,7 @@ trueno.connect((s)=> {
                   .prefix('prop.name', 'au')
                   .limit(50);*/
 
-  g.fetch('v',filter).then((result) => {
+  g.fetch('v'/*,filter*/).then((result) => {
     console.log('Vertex fetch', result);
   });
 
