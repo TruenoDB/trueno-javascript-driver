@@ -9,10 +9,12 @@
 
 
 const Trueno = require('../../lib/trueno');
-const testcases = require('./testcases-graphs.json');
+const testcases = require('./testcases-graphs-4.json');
 
 /* Instantiate connection */
 let trueno = new Trueno({host: 'http://localhost', port: 8000, debug: false});
+// let trueno = new Trueno({host: 'http://mc18.cs.purdue.edu', port: 8000, debug: false});
+
 
 trueno.connect((s)=> {
 
