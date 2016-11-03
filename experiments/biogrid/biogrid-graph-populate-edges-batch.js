@@ -38,6 +38,7 @@ trueno.connect((s)=> {
     arr.forEach((edgePair)=> {
       let e = g.addEdge(edgePair.source, edgePair.destination);
       e.setLabel(edgePair.label);
+      e.setId(current);
       e.persist();
       current++;
     });

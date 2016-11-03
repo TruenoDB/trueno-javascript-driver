@@ -25,7 +25,7 @@ trueno.connect((s)=> {
   g.setLabel('citations');
 
   let eQueue = edges;
-  let total = eQueue.length, current = 0;
+  let total = eQueue.length, current = 0, autoId = 0;
 
   /* Insertion function */
   function insertEdge(arr) {
@@ -37,6 +37,7 @@ trueno.connect((s)=> {
     arr.forEach((edgePair)=> {
       let e = g.addEdge(edgePair[0], edgePair[1]);
       e.setLabel('cited');
+      e.setId(autoId++);
       e.persist();
       current++;
     });
