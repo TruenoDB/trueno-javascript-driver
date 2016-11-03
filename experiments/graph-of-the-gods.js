@@ -11,7 +11,7 @@ const Trueno = require('../lib/trueno');
 
 /* Instantiate connection */
 // let trueno = new Trueno({host: 'http://localhost', port: 8000, debug: false});
-let trueno = new Trueno({host: 'http://pal-nat186-111-139.itap.purdue.edu', port: 8000, debug: false});
+let trueno = new Trueno({host: 'http://localhost', port: 8000, debug: false});
 
 trueno.connect((s)=> {
 
