@@ -20,7 +20,7 @@ trueno.connect((s)=> {
   /* Create a new Graph */
   let g = trueno.Graph();
   g.setId(1);
-  g.setLabel("graphii");
+  g.setLabel("citations");
 
   console.log('------------------------Compute-------------------------------');
   let c = g.getCompute();

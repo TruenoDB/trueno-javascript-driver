@@ -1,12 +1,12 @@
 /**
  * Created by: victor on 5/29/16.
  * Source: .js
- * Author: victor
+ * Author: victor, servio
  * Description:
  *
  */
 
-const Trueno = require('../lib/trueno');
+const Trueno = require('../../lib/trueno');
 
 /* Instantiate connection */
 

@@ -45,6 +45,10 @@ trueno.connect((s)=> {
           if (status == Enums.jobStatus.FINISHED) {
              c.jobResult(jobId).then((result)=> {
                console.log('Job Result: ', result);
+               // var ranks = result.result;
+               // ranks.sort(function(a, b){return b[1]-a[1]});
+               // ranks.slice(1,10);
+               // console.log(ranks.slice(1,10));
                clearInterval(x);
              });
           }

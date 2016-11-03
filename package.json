@@ -54,6 +54,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "bluebird": "^3.4.0",
+    "csvtojson": "^1.0.3",
     "fs": "0.0.1-security",
     "node-uuid": "^1.4.7",
     "socket.io-client": "1.4.6"
