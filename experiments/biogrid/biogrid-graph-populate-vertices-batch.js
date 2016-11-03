@@ -39,6 +39,7 @@ trueno.connect((s)=> {
       v.setId(parseInt(vkey));
       //v.setLabel('paper');
       v.setLabel(vertices[vkey].label);
+      v.setProperty('name',vertices[vkey].name);
       /* persist in batch */
       v.persist();
       current++;
