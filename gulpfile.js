@@ -9,7 +9,7 @@ var plumber = require('gulp-plumber');
 var babel = require('gulp-babel');
 var del = require('del');
 var isparta = require('isparta');
-var webpack = require('gulp-webpack');
+var webpack = require('webpack-stream');
 var uglify = require('gulp-uglify');
 
 
