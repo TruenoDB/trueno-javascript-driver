@@ -28,7 +28,7 @@ trueno.connect((s)=> {
   c.setAlgorithm(Enums.algorithmType.PAGE_RANK);
   let parameters = {
       schema:         {string: "graphii"},
-      TOL:            {string: 0.001},
+      tolerance:      {string: 0.001},
       alpha:          {string: 0.85},
       persisted:      {string: "false"},
       persistedTable: {string: "vertices"}

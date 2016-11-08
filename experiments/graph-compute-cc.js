@@ -30,7 +30,7 @@ trueno.connect((s)=> {
       schema:         {string: "graphii"},
       persisted:      {string: "false"},
       alpha:          {string: "0.85"},
-      TOL:            {string: "0.001"},
+      tolerance:      {string: "0.001"},
       persistedTable: {string: "pr11"}
   };
   c.setParameters(parameters);
