@@ -16,8 +16,6 @@ let trueno = new Trueno({host: 'http://localhost', port: 8000, debug: false});
 
 trueno.connect((s)=> {
 
-
-
   /* Create a new Graph */
   let g = trueno.Graph();
 
@@ -56,4 +54,4 @@ trueno.connect((s)=> {
 
 }, (s)=> {
   console.log('disconnected', s.id);
-})
+});
