@@ -6,9 +6,8 @@
  *
  */
 
-var fs = require('fs');
-const biogrid = require('./biogrid2.json');
-
+let fs = require("fs");
+const biogrid = require('./biogrid.json');
 
   let currentVertex = 1;
   let currentEdge = 1;
@@ -63,12 +62,10 @@ const biogrid = require('./biogrid2.json');
 console.log("Total vertices ", currentVertex);
 console.log("Total edges ", currentEdge);
 
-var as = [{"id":1},{"id":2}];
+//var str2 = JSON.stringify(as);
+var strVertices = JSON.stringify(verticesJSON);
 
-var str2 = JSON.stringify(as);
-var str = JSON.stringify(verticesJSON);
-
-fs.writeFile('biogrid-vertices-neo4j.json',str2, function (err) {
+fs.writeFile('biogrid-vertices.json', strVertices, function (err) {
   if (err) throw err;
   console.log('Vertices saved!');
 });
@@ -80,14 +77,13 @@ fs.writeFile('biogrid-vertices-neo4j.json',str2, function (err) {
 //   console.log('Edges saved!');
 // });
 
-var strArrEdges = JSON.stringify(arrEdgesJSON);
+let strArrEdges = JSON.stringify(arrEdgesJSON);
 
 fs.writeFile('biogrid-edges.json', strArrEdges, function (err) {
   if (err) throw err;
   console.log('Edges saved!');
 });
 
-//console.log(h);
 
 
 

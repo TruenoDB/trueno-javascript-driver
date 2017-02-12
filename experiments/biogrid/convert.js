@@ -1,13 +1,14 @@
-var fs = require('fs');
-var Converter = require("csvtojson").Converter;
-var converter = new Converter({delimiter: 'auto'});
-converter.fromFile("./BioGridDB2.tsv",function(err,result){
+let fs = require("fs");
+let Converter = require("csvtojson").Converter;
+let converter = new Converter({delimiter: 'auto'});
+
+converter.fromFile("./biogrid-sorted-unique.csv",function(err,result){
 	  console.log(result);
 
-	  var strResult = JSON.stringify(result);
+	  let strResult = JSON.stringify(result);
 
-	fs.writeFile('biogrid2.json', strResult, function (err) {
+	fs.writeFile("biogrid.json", strResult, function (err) {
 	  if (err) throw err;
-	  console.log('BioGrid2 saved!');
+	  console.log('BioGrid saved!');
 	});
 });
