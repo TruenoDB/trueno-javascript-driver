@@ -24,7 +24,7 @@ if( !(totalArguments==requiredArguments) ) {
 }
 else {
 
-  const destinationGraph = process.argv[3];
+  const destinationGraph = process.argv[2].toString();
 
   let trueno = new Trueno({host: 'http://localhost', port: 8000, debug: false});
 
@@ -54,7 +54,7 @@ else {
     /* Get the compute of the algorithm */
     c.deploy().then((jobId) => {
 
-      console.time("TruenoConnect");
+      console.timeEnd("TruenoConnect");
 
       console.log('JobId: ', jobId);
 
