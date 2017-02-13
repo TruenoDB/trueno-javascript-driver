@@ -15,14 +15,13 @@ let trueno = new Trueno({host: 'http://localhost', port: 8000, debug: false});
 
 trueno.connect((s)=> {
 
-
   const batchSize  = 300;
 
   /* Create a new Graph */
   let g = trueno.Graph();
 
   /* Set label: very important */
-  g.setLabel('biogrid_function');
+  g.setLabel('biogrid');
 
   let vQueue = Object.keys(vertices);
   let total = vQueue.length, current = 0;

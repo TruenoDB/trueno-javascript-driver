@@ -6,7 +6,7 @@
  *
  */
 
-const Trueno = require('../lib/trueno');
+const Trueno = require('../../lib/trueno');
 
 /* Instantiate connection */
 

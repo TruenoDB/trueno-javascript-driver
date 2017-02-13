@@ -17,7 +17,7 @@ trueno.connect((s)=> {
   let g = trueno.Graph();
 
   /* Set label: very important */
-  g.setLabel('biogrid_function');
+  g.setLabel('biogrid');
 
   /* Adding properties and computed fields */
   g.setProperty('description', "biogrid_function");

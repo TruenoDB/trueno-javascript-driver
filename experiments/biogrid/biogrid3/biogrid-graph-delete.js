@@ -14,13 +14,11 @@ let trueno = new Trueno({host: 'http://localhost', port: 8000, debug: false});
 
 trueno.connect((s)=> {
 
-
-
   /* Create a new Graph */
   let g = trueno.Graph();
 
   /* Set label: very important */
-  g.setLabel('biogrid_function');
+  g.setLabel('biogrid');
 
   /* persist g */
   g.destroy().then((result) => {

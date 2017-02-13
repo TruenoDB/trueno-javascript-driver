@@ -22,7 +22,7 @@ trueno.connect((s)=> {
   let g = trueno.Graph();
 
   /* Set label: very important */
-  g.setLabel('biogrid_function');
+  g.setLabel('biogrid');
 
   let eQueue = edges;
   let total = eQueue.length, current = 0;
