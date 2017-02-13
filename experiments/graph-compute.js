@@ -1,6 +1,7 @@
 /**
  * graph-compute.js
- * This file connects to neo4j and retrieve pakeranks
+ * This file connects to neo4j and retrieve pageranks
+ * Measures Trueno's Connection time and Job's time
  *
  * @version 0.0.1
  * @author   maverick-zhn(Servio Palacios)
@@ -64,10 +65,10 @@ else {
           if (status == Enums.jobStatus.FINISHED) {
             c.jobResult(jobId).then((result) => {
               console.log('Job Result: ', result);
-              // var ranks = result.result;
-              // ranks.sort(function(a, b){return b[1]-a[1]});
-              // ranks.slice(1,10);
-              // console.log(ranks.slice(1,10));
+              let ranks = result.result;
+              ranks.sort(function(a, b){return b[1]-a[1]});
+              ranks.slice(1,10);
+              console.log(ranks.slice(1,10));
               clearInterval(x);
             });
           }
