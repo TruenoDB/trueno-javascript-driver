@@ -29,4 +29,4 @@ trueno.connect((s)=> {
 
 }, (s)=> {
   console.log('disconnected', s.id);
-})
+});

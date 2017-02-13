@@ -1,9 +1,14 @@
 /**
- * Created by: victor on 5/29/16.
- * Source: .js
- * Author: victor, servio
- * Description:
+ * biogrid-generate-csv-from-json.js
+ * This file generates csvs according to source (json)
  *
+ * @version 0.0.1
+ * @author  Victor Santos, maverick-zhn(Servio Palacios)
+ * @updated 2017.02.13
+ *
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE.txt', which is part of this source code package.
+ * Do NOT forget to reference the ORIGINAL author of the code. Be nice!
  */
 
 const Trueno = require('../../../lib/trueno');
