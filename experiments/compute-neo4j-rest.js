@@ -13,7 +13,7 @@
 
 
 let r=require("request");
-let txUrl = "http://localhost:7474/db/data/transaction/commit";
+let txUrl = "http://172.17.0.4:7474/db/data/transaction/commit";
 
 function cypher(query,params,cb) {
   r.post({uri:txUrl,
@@ -21,9 +21,16 @@ function cypher(query,params,cb) {
     function(err,res) { cb(err,res.body)})
 }
 
-
-let query="MATCH (n) RETURN n";
+//let query="MATCH (n) RETURN n";
+//let query="MATCH (a)-[:INTERACTION]-()  RETURN DISTINCT id(a) as id, a.pagerank as pagerank  ORDER BY pagerank DESC";
+let query="MATCH (a)-[:INTERACTION]-()  RETURN DISTINCT id(a) as id, a.pagerank as pagerank  ORDER BY pagerank DESC";
 let params={limit: 10};
-let cb=function(err,data) { console.log(JSON.stringify(data)) };
+let cb=function(err,data) {
+   if(data.results[0].hasOwnProperty("data")){ 
+     console.log(data.results[0].columns);
+   } else {
+     console.log("Empty"); 
+    }
+};//console.log(JSON.stringify(data)); };
 
 cypher(query,params,cb);
