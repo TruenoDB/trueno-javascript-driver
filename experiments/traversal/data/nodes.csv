@@ -1,0 +1,11 @@
+vertexId, prop.name, prop.city, prop.age, prop.role, paths.0, paths.1, paths.2, paths.3, paths.4, paths.5, paths.6
+1, Alice, Chicago, 24, sender, 1
+2, Bob, Indianapolis, 30, receiver, 2, 1_2
+3, Charlie, Chicago, 15, sender, 3, 2_4_3, 4_3, 8_4_3, 1_4_3
+4, Dan, New York, 33, whistleblower, 4, 2_4, 1_4, 1_2_4, 8_4, 5_8_4
+5, Faythe, Los Angeles, 28, receiver, 5, 1_5
+6, Grace, New York, 18, arbritor, 6, 5_6, 1_5_6
+7, Heidi, Indianapolis, 24, eavesdropper, 7, 5_7, 1_5_7
+8, Mallory, Chicago, 35, cracker, 8, 5_8, 1_5_8
+9, Oscar, Los Angeles, 60, cracker, 9, 3_9, 4_3_9
+10, Peggy, New York, 18, receiver, 10, 2_10, 1_2_10, 9_10, 3_9_10
