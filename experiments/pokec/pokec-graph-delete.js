@@ -1,34 +1,67 @@
+"use strict";
+
 /**
- * Created by: edgardo on 2/9/17.
- * Source: .js
- * Author: edgardo
- * Description:
+ * @author Edgardo A. Barsallo Yi (ebarsallo)
+ * original-nodes: 1632803
+ * original-edges: 30622564
  *
+ * This module decription
+ * @module path/moduleFileName
+ * @see module:path/referencedModuleName
  */
 
-const Trueno = require('../../lib/trueno');
+/* import modules */
+const Promise = require("bluebird");
+const Socket = require('uws');
 
-/* Instantiate connection */
+const dbName = 'pokec';
 
-let trueno = new Trueno({host: 'http://localhost', port: 8000, debug: false});
+var ws = new Socket('ws://localhost:8008');
 
-trueno.connect((s)=> {
+/* Create callbacks reference */
+var callbacks = {};
+
+ws.on('open', function open() {
+  console.log('connected');
+  create();
+});
+
+ws.on('error', function error() {
+  console.log('Error connecting!');
+});
+
+ws.on('message', function(data, flags) {
+  console.log('Message: ' + data);
+  var obj = JSON.parse(data);
+  callbacks[obj.callbackIndex](obj);
+
+  console.log('Message: ' + data);
+});
+
+ws.on('close', function(code, message) {
+  console.log('Disconnection: ' + code + ', ' + message);
+});
+
+/* the payload object */
+var internal = {
+  index: dbName
+};
+var counter = 'create_1';
+
+var payload = {
+  callbackIndex: counter,
+  action: "drop",
+  object: internal
+};
 
 
+function create() {
+  console.log('send --> ', JSON.stringify(payload));
+  ws.send(JSON.stringify(payload));
+  /* adding callback */
+  callbacks[counter] = function(results){
+    console.log('done');
+  };
+}
 
-  /* Create a new Graph */
-  let g = trueno.Graph();
 
-  /* Set label: very important */
-  g.setLabel('pokec');
-
-  /* persist g */
-  g.destroy().then((result) => {
-    console.log("Graph g destroyed", result);
-  }, (error) => {
-    console.log("Error: Graph g destruction failed", error);
-  });
-
-}, (s)=> {
-  console.log('disconnected', s.id);
-})
