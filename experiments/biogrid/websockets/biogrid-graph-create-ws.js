@@ -14,7 +14,7 @@
 const Promise = require("bluebird");
 const Socket = require('uws');
 
-const dbName = 'pokec';
+const dbName = 'biogrid';
 
 var ws = new Socket('ws://mc17.cs.purdue.edu:8007');
 

@@ -12,8 +12,8 @@
  * Do NOT forget to reference the ORIGINAL author of the code. Be nice!
  */
 
-const Trueno = require('../lib/trueno');
-const Enums = require("../lib/core/data_structures/enums");
+const Trueno = require('../../lib/trueno');
+const Enums = require("../../lib/core/data_structures/enums");
 
 let requiredArguments = 3;
 let totalArguments = process.argv.length;
