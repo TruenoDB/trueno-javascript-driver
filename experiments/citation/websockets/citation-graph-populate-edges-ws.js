@@ -20,16 +20,6 @@ const Promise = require("bluebird");
 var Socket = require("uws");
 const fs = require("fs");
 
-// var connectionOptions =  {
-//     "force new connection" : true,
-//     "reconnection": true,
-//     "reconnectionDelay": 2000,                  //starts with 2 secs delay, then 4, 6, 8, until 60 where it stays forever until it reconnects
-//     "reconnectionDelayMax" : 60000,             //1 minute maximum delay between connections
-//     "reconnectionAttempts": "Infinity",         //to prevent dead clients, having the user to having to manually reconnect after a server restart.
-//     "timeout" : 10000,                           //before connect_error and connect_timeout are emitted.
-//     "transports" : ["websocket"]                //forces the transport to be only websocket. Server needs to be setup as well/
-// };
-
 /* websocket */
 var ws = new Socket("ws://mc17.cs.purdue.edu:8007");
 
@@ -43,22 +33,24 @@ var counter = 0;
 var bulkOperations = [];
 
 /* Elastic Search Index to be used */
-const indexName = "biogrid";
-const typeName = "v";
+const indexName = "citation";
+const typeName = "e";
 
 /* source datasets/documents [download datasets from java-script-driver] */
-const vertices = require("./biogrid-vertices.json");
+const edges = require("./citation-edges.json");
 
 /* amount of records per request */
 const batchSize  = 500;
 
 /* set this variable to vertices if you want that kind of documents */
-let vQueue = Object.keys(vertices);
+// let vQueue = Object.keys(vertices);
 
 /* set this variable to edges if you want that kind of documents */
-//let vQueue = Object.keys(edges);
+let vQueue = Object.keys(edges);
 
 let total = vQueue.length, current = 0;
+
+console.log("total edges [" + total + "]");
 
 /* set this variables to simulate delete or insert */
 var strRequest = "persist";
@@ -115,11 +107,13 @@ function pushOperation(op, obj){
 }
 
 /**
- *  insert/delete vertices/edges in batch function
+ * insert/delete vertices/edges in batch function
+ *  @param {string} op - The operation to be inserted into the bulk list.
+ *
  */
 function insertDeleteVertices(arr,op) {
 
-  /* Persist all vertices */
+  /* Persist all edges */
   arr.forEach((vkey)=> {
     let v = {};
     v.id = null;
@@ -128,13 +122,10 @@ function insertDeleteVertices(arr,op) {
 
     v.id = parseInt(vkey);
 
-    for (let prop in vertices[vkey]) {
-      if (prop == "label") {
-        v._label = vertices[vkey][prop];
-      } else {
-        v._prop[prop] = vertices[vkey][prop];
-      }
-    }//for
+    //console.log("source [" + edges[vkey][0] + "] : target [" + edges[vkey][1] + "] : label [" + edges[vkey][2] + "]");
+    v.source = edges[vkey][0];
+    v.target = edges[vkey][1];
+    v._label = "cites";
 
     /* building the message */
     let payload = {
@@ -157,7 +148,6 @@ function insertDeleteVertices(arr,op) {
 
     //console.log("Vertices batch created.", current / total);
     var currentTick = Math.floor(current/total*100);
-
     if(currentTick>previous){
       previous = currentTick;
       //console.log(thickness);
@@ -290,27 +280,27 @@ function buildVerticesFromJSON(){
   insertDeleteVertices(vQueue.splice(0, batchSize),strRequest);
 }
 
-ws.on('open', function open() {
-  console.log('connected');
+ws.on("open", function open() {
+  console.log("connected");
   console.time("time");
 
   /* start bulk read and request to socket server */
   buildVerticesFromJSON();
 });
 
-ws.on('error', function error() {
+ws.on("error", function error() {
   console.log('Error connecting!');
 });
 
-ws.on('message', function(data, flags) {
+ws.on("message", function(data, flags) {
   var obj = JSON.parse(data);
   //console.log(obj);
   /* invoke the callback */
   callbacks[obj.callbackIndex]();
 
-  process.stdout.write('.');
+  process.stdout.write(".");
 });
 
-ws.on('close', function(code, message) {
+ws.on("close", function(code, message) {
   console.log('Disconnection: ' + code + ', ' + message);
 });
