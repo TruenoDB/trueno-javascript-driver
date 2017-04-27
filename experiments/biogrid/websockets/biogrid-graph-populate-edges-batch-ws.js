@@ -58,6 +58,8 @@ const batchSize  = 500;
 /* set this variable to edges if you want that kind of documents */
 let vQueue = Object.keys(edges);
 
+let eQueue = edges;
+
 let total = vQueue.length, current = 0;
 
 console.log("total edges [" + total + "]");
@@ -123,26 +125,30 @@ function pushOperation(op, obj){
  */
 function insertDeleteVertices(arr,op) {
 
-  /* Persist all vertices */
-  arr.forEach((vkey)=> {
-    let v = {};
-    v.id = null;
-    v._label = null;
-    v._prop = {};
+  /* Persist all edges */
+  arr.forEach((edgePair)=> {
+    let e = {};
+    e.id = null;
+    e._label = null;
+    e._prop = {};
 
-    v.id = parseInt(vkey);
+    e.id = current;
 
+    e.source = edgePair.source;
+    e.target = edgePair.destination;
+    e._label = "interaction";
 
-    console.log("source [" + edges[vkey][0] + "] : target [" + edges[vkey][1] + "] : label [" + edges[vkey][2] + "]");
-    v.source = edges[vkey][0];
-    v.target = edges[vkey][1];
-    v._label = edges[vkey][2];
+    //console.log("source [" + e.source + "] : target [" + e.target + "]");
+    // console.log("source [" + edges[vkey][0] + "] : target [" + edges[vkey][1] + "] : label [" + edges[vkey][2] + "]");
+    // v.source = edges[vkey][0];
+    // v.target = edges[vkey][1];
+    // v._label = edges[vkey][2];
 
     /* building the message */
     let payload = {
       graph: indexName,
       type: typeName,
-      obj: v
+      obj: e
     };
 
     if(op === "persist"){
@@ -166,8 +172,8 @@ function insertDeleteVertices(arr,op) {
     }
 
     /* Continue inserting */
-    if (vQueue.length) {
-      insertDeleteVertices(vQueue.splice(0, batchSize),op);
+    if (eQueue.length) {
+      insertDeleteVertices(eQueue.splice(0, batchSize),op);
     }else{
       console.timeEnd("time");
       process.exit();
@@ -177,8 +183,8 @@ function insertDeleteVertices(arr,op) {
 
     console.log("Error: Vertices batch creation failed.", error, current / total);
     /* Continue inserting */
-    if (vQueue.length) {
-      insertDeleteVertices(vQueue.splice(0, batchSize),op);
+    if (eQueue.length) {
+      insertDeleteVertices(eQueue.splice(0, batchSize),op);
     } else {
       process.exit();
     }
@@ -288,7 +294,7 @@ function _bulk() {
  */
 function buildVerticesFromJSON(){
   /* Initiating vertex insertion */
-  insertDeleteVertices(vQueue.splice(0, batchSize),strRequest);
+  insertDeleteVertices(eQueue.splice(0, batchSize),strRequest);
 }
 
 ws.on("open", function open() {
