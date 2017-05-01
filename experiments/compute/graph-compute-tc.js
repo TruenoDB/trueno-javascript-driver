@@ -6,8 +6,8 @@
  *
  */
 
-const Trueno = require('../lib/trueno');
-const Enums = require("../lib/core/data_structures/enums");
+const Trueno = require('../../lib/trueno');
+const Enums = require("../../lib/core/data_structures/enums");
 
 /* Instantiate connection */
 

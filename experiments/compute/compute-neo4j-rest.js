@@ -1,9 +1,9 @@
 /**
  * graph-compute-neo4j.js
- * This file connects to neo4j and retrieve pakeranks
+ * This file connects to neo4j and retrieve pageranks
  *
  * @version 0.0.1
- * @author  Victor, Servio
+ * @author  Servio
  * @updated 2017.02.13
  *
  * This file is subject to the terms and conditions defined in
@@ -15,19 +15,19 @@ console.time("totalTime");
 
 let strMazerunnerUrl = "http://172.17.0.4:7474/service/mazerunner/analysis/pagerank/ITERACTION";
 
-var http = require('http');
+let http = require('http');
 
 console.time("jobRequest");
 
-//The url we want is: 'www.random.org/integers/?num=1&min=1&max=10&col=1&base=10&format=plain&rnd=new'
-var options = {
+//The url we want is: "http://172.17.0.4:7474/service/mazerunner/analysis/pagerank/ITERACTION";
+let options = {
   host: '172.17.0.4',
   port: '7474',
   path: '/service/mazerunner/analysis/pagerank/ITERACTION'
 };
 
 callback = function(response) {
-  var str = '';
+  let str = '';
 
   //another chunk of data has been recieved, so append it to `str`
   response.on('data', function (chunk) {
@@ -52,20 +52,16 @@ function cypher(query,params,cb) {
     function(err,res) { cb(err,res.body)})
 }
 
-//let query="MATCH (n) RETURN n";
-//let query="MATCH (a)-[:INTERACTION]-()  RETURN DISTINCT id(a) as id, a.pagerank as pagerank  ORDER BY pagerank DESC";
 let query="MATCH (a)-[:ITERACTION]-()  RETURN DISTINCT id(a) as id, a.pagerank as pagerank  ORDER BY pagerank DESC";
 let params={limit: 10};
 let cb=function(err,data) {
-   //if(data.results[0].hasOwnProperty("data")){ 
-   //console.log(data.results[0].data[0].row.pagerank);
-   //if(!(data.results[0].data[0].row.pagerank == "undefined" || data.results[0].data[0].row.pagerank == "null")){ 
+
    if(!data.results[0].data[0].row.pagerank){
      console.timeEnd("totalTime");
      console.log(data.results[0].data[0].row);
      clearInterval(sparkJobTimer);
    } else {
-     console.log("Spark Job Running"); 
+     console.log("Spark Job Running");
     }
 };//console.log(JSON.stringify(data)); };
 

@@ -4,14 +4,14 @@
 # trueno-javascript-driver
 Javascript driver for the TruenoDB graph database.
 
-###Creating a Graph
+### Creating a Graph
 In order to create a graph **G=(V,E)** with 
 > 1. **Vertices** V = [alice, aura, alison, peter, cat, bob]
 > 2. **Edges** E = [alice->peter, aura->alice, aura->peter, aura->alison, alison->peter, peter->cat, peter->bob]
 
 The following instructions are necessary:
 
-####Creating the Graph **G**:
+#### Creating the Graph **G**:
 ```js
   /* Create a new Graph */
   let g = trueno.Graph();
@@ -28,7 +28,7 @@ The following instructions are necessary:
   });
 ```
 
-####Creating the Vertices **V**:
+#### Creating the Vertices **V**:
 ```js
     let v1 = g.addVertex();
     let v2 = g.addVertex();
@@ -66,7 +66,7 @@ The following instructions are necessary:
 
 ```
 
-####Creating the Edges **E**:
+#### Creating the Edges **E**:
 ```js
     /* Edges */
     let e1 = g.addEdge(1,4);//alice -> peter
@@ -100,7 +100,7 @@ The instructions above will generate the following Graph **G**
   <img height="500" src="https://raw.githubusercontent.com/TruenoDB/trueno-javascript-driver/master/images/neighbors-example.png" align="middle">
 </p>
 
-####Persisting vertices in the backend
+#### Persisting vertices in the backend
 ```js
    /* persist v1 (alice) */
     v1.persist().then((result) => {
@@ -120,11 +120,11 @@ The instructions above will generate the following Graph **G**
     });
 ```
 
-###Neighbors
+### Neighbors
 
 Formally, the neighbourhood of a vertex **v** in a graph **G** is the induced subgraph of G consisting of all vertices adjacent to **v**. We can look for adjacent vertices of **v** in TruenoDB with the following instructions:
 
-####Creating all vertices
+#### Creating all vertices
 ```js
   /* Create a new Graph */
   let g = trueno.Graph();
@@ -154,7 +154,7 @@ Formally, the neighbourhood of a vertex **v** in a graph **G** is the induced su
   
 ```
 
-####Creating filter and finding incoming neighbors of [alice]
+#### Creating filter and finding incoming neighbors of [alice]
 ```js
   /* Example from Vertex.id = 2 [aura] */
   let filter2 = g.filter()
@@ -174,7 +174,7 @@ Our results will show the following:
   <img height="500" src="https://raw.githubusercontent.com/TruenoDB/trueno-javascript-driver/master/images/neighbors-example-aura-alice.png" align="middle">
 </p>
 
-####Creating filter and finding outgoing neighbors of [alice]
+#### Creating filter and finding outgoing neighbors of [alice]
 ```js
   /* Example from Vertex.id = 1 [alice] */
   let filterAlice = g.filter()
@@ -195,9 +195,9 @@ Our results will show the following:
 </p>
 
 
-##Compute
+## Compute
 
-###Deploying jobs in the Spark-Cluster
+### Deploying jobs in the Spark-Cluster
 ```js
   /* Create a new Graph */
   let g = trueno.Graph();

@@ -2,10 +2,8 @@
 
 /**
  * @author Edgardo A. Barsallo Yi (ebarsallo)
- * original-nodes: 1632803
- * original-edges: 30622564
- *
- * This module decription
+
+ * This module description
  * @module path/moduleFileName
  * @see module:path/referencedModuleName
  */
@@ -14,9 +12,9 @@
 const Promise = require("bluebird");
 const Socket = require('uws');
 
-const dbName = 'pokec';
+const dbName = "citation";
 
-var ws = new Socket('ws://mc17.cs.purdue.edu:8007');
+var ws = new Socket("ws://mc17.cs.purdue.edu:8007");
 
 /* Create callbacks reference */
 var callbacks = {};
@@ -50,7 +48,7 @@ var counter = 'create_1';
 
 var payload = {
   callbackIndex: counter,
-  action: "create",
+  action: "drop",
   object: internal
 };
 
