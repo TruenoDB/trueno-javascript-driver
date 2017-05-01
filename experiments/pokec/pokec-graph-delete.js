@@ -16,7 +16,8 @@ const Socket = require('uws');
 
 const dbName = 'pokec';
 
-var ws = new Socket('ws://localhost:8008');
+// var ws = new Socket('ws://localhost:8008');
+var ws = new Socket('ws://127.0.0.1:8007');
 
 /* Create callbacks reference */
 var callbacks = {};

@@ -6,6 +6,7 @@
  *
  * @version 0.0.0.1
  * @author  maverick-zhn(Servio Palacios)
+ * @author  ebarsallo
  * @updated 2017.03.01
  *
  *
@@ -15,23 +16,15 @@
  */
 
 /* import modules */
-var ProgressBar = require('progress');
+const ProgressBar = require('progress');
 const Promise = require("bluebird");
-var Socket = require("uws");
+const Socket = require("uws");
 const fs = require("fs");
 
-// var connectionOptions =  {
-//     "force new connection" : true,
-//     "reconnection": true,
-//     "reconnectionDelay": 2000,                  //starts with 2 secs delay, then 4, 6, 8, until 60 where it stays forever until it reconnects
-//     "reconnectionDelayMax" : 60000,             //1 minute maximum delay between connections
-//     "reconnectionAttempts": "Infinity",         //to prevent dead clients, having the user to having to manually reconnect after a server restart.
-//     "timeout" : 10000,                           //before connect_error and connect_timeout are emitted.
-//     "transports" : ["websocket"]                //forces the transport to be only websocket. Server needs to be setup as well/
-// };
 
 /* websocket */
-var ws = new Socket('ws://localhost:8008');
+// var ws = new Socket('ws://localhost:8007');
+var ws = new Socket('ws://127.0.0.1:8007');
 
 var callbacks = {};
 
@@ -46,25 +39,30 @@ var bulkOperations = [];
 const indexName = "pokec";
 const typeName = "e";
 
-/* source datasets/documents [download datasets from java-script-driver] */
-// const vertices = require('./datasets/pokec/trueno/ soc-pokec-profiles-part-a.json');
-// const edges = require('./datasets/pokec/trueno/edges-aa.json');  const offset = 0;
-// const edges = require('./datasets/pokec/trueno/edges-ab.json');  const offset =  2000000;
-// const edges = require('./datasets/pokec/trueno/edges-ac.json');  const offset =  4000000;
-// const edges = require('./datasets/pokec/trueno/edges-ad.json');  const offset =  6000000;
-// const edges = require('./datasets/pokec/trueno/edges-ae.json');  const offset =  8000000;
-// const edges = require('./datasets/pokec/trueno/edges-af.json');  const offset = 10000000;
-// const edges = require('./datasets/pokec/trueno/edges-ag.json');  const offset = 12000000;
-// const edges = require('./datasets/pokec/trueno/edges-ah.json');  const offset = 14000000;
-// const edges = require('./datasets/pokec/trueno/edges-ai.json');  const offset = 16000000;
-// const edges = require('./datasets/pokec/trueno/edges-aj.json');  const offset = 18000000;
-// const edges = require('./datasets/pokec/trueno/edges-ak.json');  const offset = 20000000;
-// const edges = require('./datasets/pokec/trueno/edges-al.json');  const offset = 22000000;
-// const edges = require('./datasets/pokec/trueno/edges-am.json');  const offset = 24000000;
-// const edges = require('./datasets/pokec/trueno/edges-an.json');  const offset = 26000000;
-// const edges = require('./datasets/pokec/trueno/edges-ao.json');  const offset = 28000000;
-// const edges = require('./datasets/pokec/trueno/edges-ap.json');  const offset = 30000000;
+/* source datasets/documents */
+const input = [
+  { file : './data/edges-aa.json', offset :        0 },
+  { file : './data/edges-ab.json', offset :  2000000 },
+  { file : './data/edges-ac.json', offset :  4000000 },
+  { file : './data/edges-ad.json', offset :  6000000 },
+  { file : './data/edges-ae.json', offset :  8000000 },
+  { file : './data/edges-af.json', offset : 10000000 },
+  { file : './data/edges-ag.json', offset : 12000000 },
+  { file : './data/edges-ah.json', offset : 14000000 },
+  { file : './data/edges-ai.json', offset : 16000000 },
+  { file : './data/edges-aj.json', offset : 18000000 },
+  { file : './data/edges-ak.json', offset : 20000000 },
+  { file : './data/edges-al.json', offset : 22000000 },
+  { file : './data/edges-am.json', offset : 24000000 },
+  { file : './data/edges-an.json', offset : 26000000 },
+  { file : './data/edges-ao.json', offset : 28000000 },
+  { file : './data/edges-ap.json', offset : 30000000 }
+];
 
+/* edges */
+let edges;
+/* lowerbound offset for ids */
+let offset;
 
 /* amount of records per request */
 const batchSize  = 500;
@@ -73,9 +71,9 @@ const batchSize  = 500;
 // let vQueue = Object.keys(vertices);
 
 /* set this variable to edges if you want that kind of documents */
-let vQueue = Object.keys(edges);
+let vQueue;
 
-let total = vQueue.length, current = 0;
+let total, current = 0;
 
 /* set this variables to simulate delete or insert */
 var strRequest = "persist";
@@ -135,7 +133,7 @@ function pushOperation(op, obj){
  *  insert/delete vertices/edges in batch function
  *
  */
-function insertDeleteVertices(arr,op) {
+function insertDeleteVertices(arr, op, resolve, reject) {
 
   /* Persist all vertices */
   arr.forEach((vkey)=> {
@@ -173,16 +171,17 @@ function insertDeleteVertices(arr,op) {
     var currentTick = Math.floor(current/total*100);
     if(currentTick>previous){
       previous = currentTick;
-      //console.log(thickness);
-      bar.tick();
+      // console.log(thickness);
+      // bar.tick();
     }
 
     /* Continue inserting */
     if (vQueue.length) {
-      insertDeleteVertices(vQueue.splice(0, batchSize),op);
+      insertDeleteVertices(vQueue.splice(0, batchSize), op, resolve, reject);
     }else{
       console.timeEnd("time");
-      process.exit();
+      resolve()
+      // process.exit();
     }
 
   }, (error) => {
@@ -190,9 +189,10 @@ function insertDeleteVertices(arr,op) {
     console.log("Error: Vertices batch creation failed.", error, current / total);
     /* Continue inserting */
     if (vQueue.length) {
-      insertDeleteVertices(vQueue.splice(0, batchSize),op);
+      insertDeleteVertices(vQueue.splice(0, batchSize), op, resolve, reject);
     } else {
-      process.exit();
+      reject(error)
+      // process.exit();
     }
 
   });
@@ -298,17 +298,58 @@ function _bulk() {
 /**
  * Uses vertices queue to create bulkOperations
  */
-function buildVerticesFromJSON(){
+function buildVerticesFromJSON(resolve, reject){
   /* Initiating vertex insertion */
-  insertDeleteVertices(vQueue.splice(0, batchSize),strRequest);
+  insertDeleteVertices(vQueue.splice(0, batchSize), strRequest, resolve, reject);
+}
+
+/**
+ * Process each input file, and insert the records onto the database
+ * @param data
+ */
+function doProcess(data) {
+
+  /* load vertices */
+  edges = require (data.file);
+  /* set offset */
+  offset = data.offset;
+  console.log(data.file);
+  /* get keys from input data */
+  vQueue = Object.keys(edges);
+  /* total keys to process on the iteration */
+  total = vQueue.length;
+
+  console.time("time");
+  /* start bulk read and request to socket server */
+  return new Promise((resolve, reject) => {
+    buildVerticesFromJSON(resolve, reject);
+  });
+
+}
+
+/**
+ * Loop over all input files
+ */
+function doLoop() {
+
+  let promise = doProcess(input.shift());
+
+  promise.then(() => {
+    if (input.length > 0) {
+      doLoop();
+    } else {
+      console.log('done!');
+    }
+  });
+
 }
 
 ws.on('open', function open() {
   console.log('connected');
-  console.time("time");
 
-  /* start bulk read and request to socket server */
-  buildVerticesFromJSON();
+  /* loop over all input entries */
+  doLoop();
+
 });
 
 ws.on('error', function error() {
