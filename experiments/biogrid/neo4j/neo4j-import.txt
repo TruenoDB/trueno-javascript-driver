@@ -1,0 +1,1 @@
+./neo4j-import --into ../data/databases/graph.db --id-type INTEGER --nodes vertices.csv --relationships:INTERACTION edges.csv
