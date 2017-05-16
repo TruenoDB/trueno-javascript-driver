@@ -20,16 +20,6 @@ const Promise = require("bluebird");
 var Socket = require("uws");
 const fs = require("fs");
 
-// var connectionOptions =  {
-//     "force new connection" : true,
-//     "reconnection": true,
-//     "reconnectionDelay": 2000,                  //starts with 2 secs delay, then 4, 6, 8, until 60 where it stays forever until it reconnects
-//     "reconnectionDelayMax" : 60000,             //1 minute maximum delay between connections
-//     "reconnectionAttempts": "Infinity",         //to prevent dead clients, having the user to having to manually reconnect after a server restart.
-//     "timeout" : 10000,                           //before connect_error and connect_timeout are emitted.
-//     "transports" : ["websocket"]                //forces the transport to be only websocket. Server needs to be setup as well/
-// };
-
 /* websocket */
 var ws = new Socket("ws://mc17.cs.purdue.edu:8007");
 
@@ -55,10 +45,9 @@ const batchSize  = 500;
 /* set this variable to vertices if you want that kind of documents */
 let vQueue = Object.keys(vertices);
 
-/* set this variable to edges if you want that kind of documents */
-//let vQueue = Object.keys(edges);
-
 let total = vQueue.length, current = 0;
+
+console.log("total vertices [" + total + "]");
 
 /* set this variables to simulate delete or insert */
 var strRequest = "persist";
@@ -115,7 +104,9 @@ function pushOperation(op, obj){
 }
 
 /**
- *  insert/delete vertices/edges in batch function
+ * insert/delete vertices/edges in batch function
+ * @param {string} op - The operation to be inserted into the bulk list.
+ *
  */
 function insertDeleteVertices(arr,op) {
 

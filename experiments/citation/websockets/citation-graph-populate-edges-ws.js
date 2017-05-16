@@ -108,7 +108,7 @@ function pushOperation(op, obj){
 
 /**
  * insert/delete vertices/edges in batch function
- *  @param {string} op - The operation to be inserted into the bulk list.
+ * @param {string} op - The operation to be inserted into the bulk list.
  *
  */
 function insertDeleteVertices(arr,op) {
@@ -148,6 +148,7 @@ function insertDeleteVertices(arr,op) {
 
     //console.log("Vertices batch created.", current / total);
     var currentTick = Math.floor(current/total*100);
+
     if(currentTick>previous){
       previous = currentTick;
       //console.log(thickness);
