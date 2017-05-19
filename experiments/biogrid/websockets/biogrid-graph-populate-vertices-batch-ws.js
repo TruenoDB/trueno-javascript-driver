@@ -47,7 +47,7 @@ const indexName = "biogrid";
 const typeName = "v";
 
 /* source datasets/documents [download datasets from java-script-driver] */
-const vertices = require("./biogrid-vertices.json");
+const vertices = require("./../dataset/biogrid-vertices.json");
 
 /* amount of records per request */
 const batchSize  = 500;

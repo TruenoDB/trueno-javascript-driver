@@ -47,7 +47,7 @@ const indexName = "biogrid";
 const typeName = "e";
 
 /* source datasets/documents [download datasets from java-script-driver] */
-const edges = require("./biogrid-edges.json");
+const edges = require("./../dataset/biogrid-edges.json");
 
 /* amount of records per request */
 const batchSize  = 500;
