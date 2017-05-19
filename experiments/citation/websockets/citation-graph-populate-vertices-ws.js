@@ -37,7 +37,7 @@ const indexName = "citation";
 const typeName = "v";
 
 /* source datasets/documents [download datasets from java-script-driver] */
-const vertices = require("./citation-vertices.json");
+const vertices = require("./../dataset/citation-vertices.json");
 
 /* amount of records per request */
 const batchSize  = 500;
