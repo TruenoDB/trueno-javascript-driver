@@ -7,7 +7,7 @@
  */
 
 const Trueno = require('../../lib/trueno');
-const vertices = require('./biogrid-vertices.json');
+const vertices = require('./dataset/biogrid-vertices.json');
 
 /* Instantiate connection */
 

@@ -38,7 +38,7 @@ const indexName = "citation";
 const typeName = "e";
 
 /* source datasets/documents [download datasets from java-script-driver] */
-const edges = require("./citation-edges.json");
+const edges = require("./../dataset/citation-edges.json");
 
 /* amount of records per request */
 const batchSize  = 500;
