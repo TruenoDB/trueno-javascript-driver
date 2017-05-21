@@ -31,7 +31,7 @@ const fs = require("fs");
 // };
 
 /* websocket */
-let ws = new Socket("ws://mc17.cs.purdue.edu:8007");
+let ws = new Socket("ws://127.0.0.1:8007");
 
 let callbacks = {};
 
