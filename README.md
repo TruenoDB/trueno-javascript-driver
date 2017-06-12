@@ -97,7 +97,7 @@ The following instructions are necessary:
 
 The instructions above will generate the following Graph **G**
 <p align="center">
-  <img height="500" src="https://raw.githubusercontent.com/TruenoDB/trueno-javascript-driver/master/images/neighbors-example.png" align="middle">
+  <img height="400" src="https://raw.githubusercontent.com/TruenoDB/trueno-javascript-driver/master/images/neighbors-example.png" align="middle">
 </p>
 
 #### Persisting vertices in the backend
@@ -110,7 +110,7 @@ The instructions above will generate the following Graph **G**
     });
 ```
 
-####Persisting edges in the backend
+#### Persisting edges in the backend
 ```js
    /* persist e1 */
     e1.persist().then((result) => {
@@ -171,7 +171,7 @@ Formally, the neighbourhood of a vertex **v** in a graph **G** is the induced su
 Our results will show the following:
 
 <p align="center">
-  <img height="500" src="https://raw.githubusercontent.com/TruenoDB/trueno-javascript-driver/master/images/neighbors-example-aura-alice.png" align="middle">
+  <img height="400" src="https://raw.githubusercontent.com/TruenoDB/trueno-javascript-driver/master/images/neighbors-example-aura-alice.png" align="middle">
 </p>
 
 #### Creating filter and finding outgoing neighbors of [alice]
@@ -191,7 +191,7 @@ Our results will show the following:
 Our results will show the following:
 
 <p align="center">
-  <img height="500" src="https://raw.githubusercontent.com/TruenoDB/trueno-javascript-driver/master/images/neighbors-example-alice-peter.png" align="middle">
+  <img height="400" src="https://raw.githubusercontent.com/TruenoDB/trueno-javascript-driver/master/images/neighbors-example-alice-peter.png" align="middle">
 </p>
 
 
