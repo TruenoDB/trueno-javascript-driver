@@ -40,6 +40,7 @@ const typeName = "v";
 
 /* source datasets/documents */
 const input = [
+/*
   '/tmp/data/vertices-0000.json',
   '/tmp/data/vertices-0001.json',
   '/tmp/data/vertices-0002.json',
@@ -79,7 +80,7 @@ const input = [
   '/tmp/data/vertices-0036.json',
   '/tmp/data/vertices-0037.json',
   '/tmp/data/vertices-0038.json',
-  '/tmp/data/vertices-0039.json',
+  '/tmp/data/vertices-0039.json', 
   '/tmp/data/vertices-0040.json',
   '/tmp/data/vertices-0041.json',
   '/tmp/data/vertices-0042.json',
@@ -164,6 +165,7 @@ const input = [
   '/tmp/data/vertices-0121.json',
   '/tmp/data/vertices-0122.json',
   '/tmp/data/vertices-0123.json',
+*/
   '/tmp/data/vertices-0124.json',
   '/tmp/data/vertices-0125.json',
   '/tmp/data/vertices-0126.json',
