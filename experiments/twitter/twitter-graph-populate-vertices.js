@@ -322,6 +322,7 @@ function doLoop() {
       doLoop();
     } else {
       console.log('done!');
+      process.exit();
     }
   });
 
