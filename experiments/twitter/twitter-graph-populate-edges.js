@@ -7385,6 +7385,19 @@ function doLoop() {
 ws.on('open', function open() {
   console.log('connected');
 
+  /* accept args from command line */
+  if ( process.argv.length > 2 ) {
+    let filename = process.argv[2];
+    let offset = process.argv[3];
+
+    let obj = {};
+    obj.file = filename;
+    obj.offset = offset;
+
+    input.length = 0;
+    input.push(obj);
+  }
+
   /* loop over all input entries */
   doLoop();
 
