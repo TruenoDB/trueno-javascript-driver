@@ -37,7 +37,7 @@ const indexName = "ldbc";
 const typeName = "v";
 
 /* source datasets/documents [download datasets from java-script-driver] */
-const vertices = require("./../dataset/ldbc-vertices.json");
+const vertices = require("../datasets/ldbc-vertices.json");
 
 /* amount of records per request */
 const batchSize  = 500;
@@ -143,7 +143,7 @@ function insertDeleteVertices(arr,op) {
     current++;
   });
 
-  console.log("before promise");
+  //console.log("before promise");
 
   /* send vertices' batches to the socket server */
   _bulk().then( (result) => {
@@ -301,7 +301,8 @@ ws.on('message', function(data, flags) {
   /* invoke the callback */
   callbacks[obj.callbackIndex]();
 
-  process.stdout.write('.');
+  //current++;
+  //process.stdout.write('.');
 });
 
 ws.on('close', function(code, message) {

@@ -34,11 +34,11 @@ var counter = 0;
 var bulkOperations = [];
 
 /* Elastic Search Index to be used */
-const indexName = "citation";
+const indexName = "ldbc";
 const typeName = "e";
 
 /* source datasets/documents [download datasets from java-script-driver] */
-const edges = require("./../dataset/ldbc-edges.json");
+const edges = require("../datasets/ldbc-edges.json");
 
 /* amount of records per request */
 const batchSize  = 500;
@@ -126,7 +126,7 @@ function insertDeleteVertices(arr,op) {
     //console.log("source [" + edges[vkey][0] + "] : target [" + edges[vkey][1] + "] : label [" + edges[vkey][2] + "]");
     v.source = edges[vkey][0];
     v.target = edges[vkey][1];
-    v._label = "cites";
+    v._label = "knows";
 
     /* building the message */
     let payload = {
@@ -166,7 +166,7 @@ function insertDeleteVertices(arr,op) {
 
   }, (error) => {
 
-    console.log("Error: Vertices batch creation failed.", error, current / total);
+    console.log("Error: Edges batch creation failed.", error, current / total);
     /* Continue inserting */
     if (vQueue.length) {
       insertDeleteVertices(vQueue.splice(0, batchSize),op);
@@ -300,7 +300,7 @@ ws.on("message", function(data, flags) {
   /* invoke the callback */
   callbacks[obj.callbackIndex]();
 
-  process.stdout.write(".");
+  //process.stdout.write(".");
 });
 
 ws.on("close", function(code, message) {
