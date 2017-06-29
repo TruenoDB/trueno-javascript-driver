@@ -314,8 +314,6 @@ ws.on("message", function(data, flags) {
   //console.log(obj);
   /* invoke the callback */
   callbacks[obj.callbackIndex]();
-
-  process.stdout.write(".");
 });
 
 ws.on("close", function(code, message) {

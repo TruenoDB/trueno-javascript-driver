@@ -30,15 +30,27 @@ var callbacks = {};
 var limit = 10000000;
 var counter = 0;
 
-/* keeps the current batch to be sent */
+/* keeps the current batch */
 var bulkOperations = [];
 
-/* Elastic Search Index to be used */
-const indexName = "ldbc";
+let requiredArguments = 3;
+let totalArguments = process.argv.length;
+
+/* Instantiate connection */
+
+if( !(totalArguments==requiredArguments) ) {
+  console.log("[usage] node ldbc-graph-populate-edges-ws.js graph");
+  process.exit(0)
+}
+
+const destinationGraph = process.argv[2].toString();
+
+/* Elastic Search Index */
+const indexName = "ldbc_" + destinationGraph;
 const typeName = "e";
 
 /* source datasets/documents [download datasets from java-script-driver] */
-const edges = require("../datasets/ldbc-edges.json");
+const edges = require("../datasets/ldbc-" + destinationGraph + "-edges.json");
 
 /* amount of records per request */
 const batchSize  = 500;
@@ -295,12 +307,10 @@ ws.on("error", function error() {
 });
 
 ws.on("message", function(data, flags) {
-  var obj = JSON.parse(data);
-  //console.log(obj);
+  let obj = JSON.parse(data);
+
   /* invoke the callback */
   callbacks[obj.callbackIndex]();
-
-  //process.stdout.write(".");
 });
 
 ws.on("close", function(code, message) {

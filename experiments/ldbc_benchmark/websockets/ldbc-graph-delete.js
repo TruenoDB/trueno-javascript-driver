@@ -12,7 +12,16 @@
 const Promise = require("bluebird");
 const Socket = require('uws');
 
-const dbName = "ldbc";
+let dbName = "ldbc";
+
+if( !(totalArguments==requiredArguments) ) {
+  console.log("[usage] node ldbc-graph-create.js graph");
+  process.exit(0)
+}
+
+const destinationGraph = process.argv[2].toString();
+
+dbName = destinationGraph;
 
 var ws = new Socket("ws://127.0.0.1:8007");
 
