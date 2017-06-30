@@ -14,6 +14,9 @@ const Socket = require('uws');
 
 let dbName = "ldbc";
 
+let requiredArguments = 3;
+let totalArguments = process.argv.length;
+
 if( !(totalArguments==requiredArguments) ) {
   console.log("[usage] node ldbc-graph-create.js graph");
   process.exit(0)

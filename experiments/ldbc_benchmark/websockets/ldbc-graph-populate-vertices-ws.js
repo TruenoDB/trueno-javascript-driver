@@ -49,7 +49,7 @@ if( !(totalArguments==requiredArguments) ) {
   let typeName = "v";
 
   /* source datasets/documents [download datasets from java-script-driver] */
-  const vertices = require("../datasets/ldbc-" + destinationGraph + "-vertices.json");
+  const vertices = require("../datasets/" + destinationGraph + "/ldbc-" + destinationGraph + "-vertices.json");
 
   /* amount of records per request */
   const batchSize = 500;
@@ -320,3 +320,5 @@ if( !(totalArguments==requiredArguments) ) {
   ws.on('close', function (code, message) {
     console.log('Disconnection: ' + code + ', ' + message);
   });
+
+  //https://hangouts.google.com/call/blznuvawxnegdn3gidjtdmd2xiu

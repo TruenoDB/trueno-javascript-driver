@@ -11,8 +11,20 @@
  * Do NOT forget to reference the ORIGINAL author of the code. Be nice!
  */
 
+let requiredArguments = 3;
+let totalArguments = process.argv.length;
+
+/* Instantiate connection */
+
+if( !(totalArguments==requiredArguments) ) {
+  console.log("[usage] node ldbc-generate-vertices-edges.js graph");
+  process.exit(0)
+}
+
+const destinationGraph = process.argv[2].toString();
+
 let fs = require("fs");
-const ldbc = require('./ldbc-vertices-edges-source.json');
+const ldbc = require("./datasets/" + destinationGraph + "/ldbc-"+ destinationGraph + "-vertices-edges-source.json");
 
   let currentVertex = 1;
   let currentEdge = 1;
@@ -30,13 +42,15 @@ const ldbc = require('./ldbc-vertices-edges-source.json');
   /* Iterate all vertices */
   ldbc.forEach((edge)=> {
 
-     if (h.hasOwnProperty(edge.source)) {
+     let intSource = parseInt(edge.source);
+
+     if (h.hasOwnProperty(intSource)) {
        edgeSource = h[edge.source].id;
      }
      else{
-       currentVertex = edge.source;
-       h[edge.source] = {};
-       h[edge.source].id = currentVertex;
+       currentVertex = intSource;
+       h[intSource] = {};
+       h[intSource].id = currentVertex;
        verticesJSON[currentVertex.toString()] = {};
        verticesJSON[currentVertex.toString()].id = currentVertex.toString();//last edition
        verticesJSON[currentVertex.toString()].label = "knows";
@@ -47,13 +61,15 @@ const ldbc = require('./ldbc-vertices-edges-source.json');
        countVertex++;
      }
 
-     if (h.hasOwnProperty(edge.destination)) {
-       edgeDestination = h[edge.destination].id;
+     let intDestination = parseInt(edge.destination);
+
+     if (h.hasOwnProperty(intDestination)) {
+       edgeDestination = h[intDestination].id;
      }
      else{
-       currentVertex = edge.destination;
-       h[edge.destination] = {};
-       h[edge.destination].id = currentVertex;
+       currentVertex = intDestination;
+       h[intDestination] = {};
+       h[intDestination].id = currentVertex;
        verticesJSON[currentVertex.toString()] = {};
        verticesJSON[currentVertex.toString()].id = currentVertex.toString();//last edition
        verticesJSON[currentVertex.toString()].label = "knows";
@@ -79,7 +95,8 @@ console.log("Total edges ", currentEdge);
 //var str2 = JSON.stringify(as);
 let strVertices = JSON.stringify(verticesJSON);
 
-fs.writeFile('./datasets/ldbc-vertices.json', strVertices, function (err) {
+fs.writeFile("./datasets/" + destinationGraph + "/ldbc-" + destinationGraph +
+             "-vertices.json", strVertices, function (err) {
   if (err) throw err;
   console.log('Vertices saved!');
 });
@@ -95,7 +112,8 @@ fs.writeFile('./datasets/ldbc-vertices-neo4j.json', strArrVertices, function (er
 
 let strArrEdges = JSON.stringify(arrEdgesJSON);
 
-fs.writeFile('./datasets/ldbc-edges.json', strArrEdges, function (err) {
+fs.writeFile("./datasets/" + destinationGraph + "/ldbc-" + destinationGraph +
+             "-edges.json", strArrEdges, function (err) {
   if (err) throw err;
   console.log('Edges saved!');
 });

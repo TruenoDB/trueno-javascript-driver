@@ -15,23 +15,26 @@
  */
 
 /* import modules */
-var ProgressBar = require('progress');
-const Promise = require("bluebird");
-var Socket = require("uws");
-const fs = require("fs");
+var ProgressBar = require("progress");
+const Promise   = require("bluebird");
+var Socket      = require("uws");
+const fs        = require("fs");
 
 /* websocket */
-var ws = new Socket("ws://127.0.0.1:8007");
+let ws = new Socket("ws://127.0.0.1:8007");
 
-
-var callbacks = {};
+let callbacks = {};
 
 /* variables to keep track of batches and progress */
-var limit = 10000000;
-var counter = 0;
+let limit = 10000000;
+let counter = 0;
 
-/* keeps the current batch */
-var bulkOperations = [];
+/* keeps the current batch to be sent */
+let bulkOperations = [];
+
+/* Elastic Search Index to be used */
+let indexName = "ldbc_";
+const typeName = "e";
 
 let requiredArguments = 3;
 let totalArguments = process.argv.length;
@@ -39,18 +42,16 @@ let totalArguments = process.argv.length;
 /* Instantiate connection */
 
 if( !(totalArguments==requiredArguments) ) {
-  console.log("[usage] node ldbc-graph-populate-edges-ws.js graph");
+  console.log("[usage] node ldbc-graph-create.js graph");
   process.exit(0)
 }
 
 const destinationGraph = process.argv[2].toString();
 
-/* Elastic Search Index */
-const indexName = "ldbc_" + destinationGraph;
-const typeName = "e";
+indexName += destinationGraph;
 
 /* source datasets/documents [download datasets from java-script-driver] */
-const edges = require("../datasets/ldbc-" + destinationGraph + "-edges.json");
+const edges = require("../datasets/" + destinationGraph + "/ldbc-" + destinationGraph + "-edges.json");
 
 /* amount of records per request */
 const batchSize  = 500;
@@ -60,6 +61,8 @@ const batchSize  = 500;
 
 /* set this variable to edges if you want that kind of documents */
 let vQueue = Object.keys(edges);
+
+let eQueue = edges;
 
 let total = vQueue.length, current = 0;
 
@@ -120,31 +123,30 @@ function pushOperation(op, obj){
 }
 
 /**
- * insert/delete vertices/edges in batch function
- * @param {string} op - The operation to be inserted into the bulk list.
+ *  insert/delete vertices/edges in batch function
+ *  @param {string} op - The operation to be inserted into the bulk list.
  *
  */
 function insertDeleteVertices(arr,op) {
 
   /* Persist all edges */
-  arr.forEach((vkey)=> {
-    let v = {};
-    v.id = null;
-    v._label = null;
-    v._prop = {};
+  arr.forEach((edgePair)=> {
+    let e = {};
+    e.id = null;
+    e._label = null;
+    e._prop = {};
 
-    v.id = parseInt(vkey);
+    e.id = current;
 
-    //console.log("source [" + edges[vkey][0] + "] : target [" + edges[vkey][1] + "] : label [" + edges[vkey][2] + "]");
-    v.source = edges[vkey][0];
-    v.target = edges[vkey][1];
-    v._label = "knows";
+    e.source = edgePair.source;
+    e.target = edgePair.destination;
+    e._label = "knows";
 
     /* building the message */
     let payload = {
       graph: indexName,
       type: typeName,
-      obj: v
+      obj: e
     };
 
     if(op === "persist"){
@@ -161,7 +163,6 @@ function insertDeleteVertices(arr,op) {
 
     //console.log("Vertices batch created.", current / total);
     var currentTick = Math.floor(current/total*100);
-
     if(currentTick>previous){
       previous = currentTick;
       //console.log(thickness);
@@ -169,8 +170,8 @@ function insertDeleteVertices(arr,op) {
     }
 
     /* Continue inserting */
-    if (vQueue.length) {
-      insertDeleteVertices(vQueue.splice(0, batchSize),op);
+    if (eQueue.length) {
+      insertDeleteVertices(eQueue.splice(0, batchSize),op);
     }else{
       console.timeEnd("time");
       process.exit();
@@ -178,10 +179,10 @@ function insertDeleteVertices(arr,op) {
 
   }, (error) => {
 
-    console.log("Error: Edges batch creation failed.", error, current / total);
+    console.log("Error: Vertices batch creation failed.", error, current / total);
     /* Continue inserting */
-    if (vQueue.length) {
-      insertDeleteVertices(vQueue.splice(0, batchSize),op);
+    if (eQueue.length) {
+      insertDeleteVertices(eQueue.splice(0, batchSize),op);
     } else {
       process.exit();
     }
@@ -291,11 +292,11 @@ function _bulk() {
  */
 function buildVerticesFromJSON(){
   /* Initiating vertex insertion */
-  insertDeleteVertices(vQueue.splice(0, batchSize),strRequest);
+  insertDeleteVertices(eQueue.splice(0, batchSize),strRequest);
 }
 
 ws.on("open", function open() {
-  console.log("connected");
+  console.log('connected');
   console.time("time");
 
   /* start bulk read and request to socket server */
@@ -307,8 +308,8 @@ ws.on("error", function error() {
 });
 
 ws.on("message", function(data, flags) {
-  let obj = JSON.parse(data);
-
+  var obj = JSON.parse(data);
+  //console.log(obj);
   /* invoke the callback */
   callbacks[obj.callbackIndex]();
 });
