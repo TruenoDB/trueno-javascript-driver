@@ -27,12 +27,14 @@ if( !(totalArguments==requiredArguments) ) {
 
 const destinationGraph = process.argv[2].toString();
 
-converter.fromFile("./social_network_scale_" + destinationGraph + "_1/person_knows_person_0_0.csv",function(err,result){
+converter.fromFile("./social_network_scale_" + destinationGraph +
+                   "_1/person_knows_person_0_0.csv",function(err,result){
   console.log(result);
 
   let strResult = JSON.stringify(result);
 
-  fs.writeFile("./datasets/" + destinationGraph + "/ldbc-" + destinationGraph + "-vertices-edges-source.json", strResult, function (err) {
+  fs.writeFile("./datasets/" + destinationGraph + "/ldbc-" + destinationGraph +
+               "-vertices-edges-source.json", strResult, function (err) {
     if (err) throw err;
     console.log('ldbc vertices edges saved!');
   });
