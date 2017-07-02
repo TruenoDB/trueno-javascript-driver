@@ -201,6 +201,91 @@ Algorithm time   -> [12509] ms
 
 
 
+Biogrid - PageRank
+
+Hostname         -> [pdsl14.cs.purdue.edu]
+Index            -> [biogrid]
+Algorithm        -> [pr]
+Vertices         -> [15034]
+Edges            -> [301685]
+Loading graph    -> [5911] ms
+Graph creation   -> [4903] ms
+Algorithm time   -> [6346] ms
+
+Hostname         -> [pdsl14.cs.purdue.edu]
+Index            -> [biogrid]
+Algorithm        -> [pr]
+Vertices         -> [15034]
+Edges            -> [301685]
+Loading graph    -> [5546] ms
+Graph creation   -> [4671] ms
+Algorithm time   -> [5867] ms
+
+Citations PageRank
+
+Hostname         -> [pdsl14.cs.purdue.edu]
+Index            -> [citation]
+Algorithm        -> [pr]
+Vertices         -> [29554]
+Edges            -> [167103]
+Loading graph    -> [5297] ms
+Graph creation   -> [3451] ms
+Algorithm time   -> [4335] ms
+
+Hostname         -> [pdsl14.cs.purdue.edu]
+Index            -> [citation]
+Algorithm        -> [pr]
+Vertices         -> [29554]
+Edges            -> [167103]
+Loading graph    -> [5059] ms
+Graph creation   -> [3210] ms
+Algorithm time   -> [5470] ms
+
+Graphalytics - Cached - first Pr then CC
+
+Hostname         -> [pdsl14.cs.purdue.edu]
+Index            -> [ldbc_graphalytics]
+Algorithm        -> [pr]
+Vertices         -> [34379]
+Edges            -> [1010631]
+Loading graph    -> [11422] ms
+Graph creation   -> [11901] ms
+[PageRank] time  -> [27629] ms
+[   CC   ] time  -> [2698] ms
+
+Hostname         -> [pdsl14.cs.purdue.edu]
+Index            -> [ldbc_graphalytics]
+Algorithm        -> [pr]
+Vertices         -> [34379]
+Edges            -> [1010631]
+Loading graph    -> [11334] ms
+Graph creation   -> [10248] ms
+[PageRank] time  -> [20743] ms
+[   CC   ] time  -> [2928] ms
+
+Graphalytics - Cached - first CC then PR [Siempre pone pagareank *fix it]
+
+Hostname         -> [pdsl14.cs.purdue.edu]
+Index            -> [ldbc_graphalytics]
+Algorithm        -> [cc]
+Vertices         -> [34379]
+Edges            -> [1010631]
+Loading graph    -> [17551] ms
+Graph creation   -> [12030] ms
+[PageRank] time  -> [22951] ms
+[   CC   ] time  -> [2549] ms
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
