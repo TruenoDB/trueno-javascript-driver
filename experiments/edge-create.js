@@ -41,19 +41,19 @@ trueno.connect((s)=> {
     e3.setProperty('relation', 'joy');
     e3.setProperty('weight', 20);
 
-    /* persist v1 */
+    /* persist e1 */
     e1.persist().then((result) => {
         console.log('Edge successfully created with id: ', e1.getId());
     }, (error) => {
         console.log('Edge persistence error: ', error);
     });
-    /* persist v2 */
+    /* persist e2 */
     e2.persist().then((result) => {
         console.log('Edge successfully created with id: ', e2.getId());
     }, (error) => {
         console.log('Edge persistence error: ', error);
     });
-    /* persist v2 */
+    /* persist e3 */
     e3.persist().then((result) => {
         console.log('Edge successfully created with id: ', e3.getId());
     }, (error) => {

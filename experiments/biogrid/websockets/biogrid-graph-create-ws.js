@@ -16,7 +16,6 @@ const Socket = require("uws");
 
 const dbName = "biogrid";
 
-//var ws = new Socket("ws://localhost:8007");
 var ws = new Socket("ws://127.0.0.1:8007");
 
 /* Create callbacks reference */
