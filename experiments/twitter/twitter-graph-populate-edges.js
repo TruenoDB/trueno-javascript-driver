@@ -36,7 +36,7 @@ var counter = 0;
 var bulkOperations = [];
 
 /* Elastic Search Index to be used */
-const indexName = "twitter{";
+const indexName = "twitter";
 const typeName = "e";
 
 /* source datasets/documents */
