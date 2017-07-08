@@ -2,6 +2,7 @@
 
 Connected Components graphalytics
 
+```
 Hostname         -> [pdsl14.cs.purdue.edu]
 Index            -> [ldbc_graphalytics]
 Algorithm        -> [cc]
@@ -274,7 +275,7 @@ Loading graph    -> [17551] ms
 Graph creation   -> [12030] ms
 [PageRank] time  -> [22951] ms
 [   CC   ] time  -> [2549] ms
-
+```
 
 
 
