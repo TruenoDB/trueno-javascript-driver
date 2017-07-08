@@ -42,7 +42,7 @@ if( totalArguments >= requiredArguments + 1){
     strHost = process.argv[4].toString();
   }
   else{
-    console.log("[Warning] --> Invalid IP address, default (127.0.0.1) used instead");
+    console.log("[Warning] --> Invalid IP address, default [127.0.0.1] used instead");
   }
 }
 
