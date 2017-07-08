@@ -27,8 +27,6 @@ let defaultHost = "127.0.0.1";
 let strHost = defaultHost;
 let strPort = defaultPort;
 
-/* Instantiate connection */
-
 if( !(totalArguments >= requiredArguments) ) {
   console.log("[usage] node trueno-graph.js action graph [host] [port]");
   process.exit(0);
