@@ -17,7 +17,7 @@ let trueno = new Trueno({host: 'http://localhost', port: 8000, debug: false});
 
 trueno.connect((s)=> {
 
-  const batchSize = 500;
+  const batchSize = 200;
 
   /* Create a new Graph */
   let g = trueno.Graph();
@@ -27,7 +27,7 @@ trueno.connect((s)=> {
 
   let eQueue = edges;
   let total = eQueue.length, current = 0;
-  console.log(total);
+  console.log("Total Edges: " + total);
 
   let edgeSource = 0;
   let edgeDestination = 0;
