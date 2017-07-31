@@ -26,7 +26,11 @@ trueno.connect((s)=> {
   g.setLabel("histone");
 
   let eQueue = edges;
-  let total = eQueue.length, current = 0;
+  let total = eQueue.length;
+
+  /* Edge id */
+  let current = 1000;
+
   console.log("Total Edges: " + total);
 
   let edgeSource = 0;
