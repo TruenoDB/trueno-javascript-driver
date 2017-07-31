@@ -1,17 +1,17 @@
 /**
  * Created by: Servio Palacios
- * Source: histone-populate-drug-edges.js
+ * Source: histone-populate-peptide-edges.js
  * Author: Servio Palacios
  * Description: Shamim's Demo Network
  *
  */
 
 const Trueno   = require('../../lib/trueno');
-const edges    = require('./datasets/histone-drug-edges-source.json');
+const edges    = require('./datasets/histone-peptide-edges-source.json');
 let vertices   = require('./datasets/histone-vertices-source.json');
 let htVertices = {};
 
-/* Trueno's Connection */
+/* Instantiate connection */
 
 let trueno = new Trueno({host: 'http://localhost', port: 8000, debug: false});
 
@@ -27,7 +27,7 @@ trueno.connect((s)=> {
 
   let eQueue = edges;
   let total = eQueue.length, current = 0;
-  console.log("Edges Total: " + total);
+  console.log(total);
 
   let edgeSource = 0;
   let edgeDestination = 0;
@@ -61,7 +61,7 @@ trueno.connect((s)=> {
     /* Persist all vertices */
     arr.forEach((edge)=> {
       edgeSource = htVertices[edge.source.toString().trim().toUpperCase()].id;
-      edgeDestination = htVertices[edge.destination.toString().trim().toUpperCase().substring(0,edge.destination.toString().length-3)].id;
+      edgeDestination = htVertices[edge.destination.toString().trim().toUpperCase().substring(0,edge.destination.toString().length)].id;
 
       if(edgeSource == null){
         badSources++;
@@ -78,9 +78,9 @@ trueno.connect((s)=> {
       else {
         let e = g.addEdge(edgeSource, edgeDestination);
         e.setLabel(edge.direction);
-        e.setProperty("oriweight_basis", edge.oriweight_basis);
-        e.setProperty("weight_basis", edge.weight_basis);
-        e.setProperty("loading_val", edge.weight_basis);
+        e.setProperty("ori_weight", edge.ori_weight);
+        e.setProperty("weight", edge.weight);
+        e.setProperty("p_val", edge.p_val);
         e.setProperty("direction", edge.direction);
         e.setId(current);
         e.persist();
@@ -113,7 +113,7 @@ trueno.connect((s)=> {
       }
     });
 
-  }
+  }//insertEdge
 
   /* Initiating vertex insertion */
   insertEdge(eQueue.splice(0, batchSize));
