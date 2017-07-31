@@ -22,7 +22,7 @@ trueno.connect((s)=> {
   /* Create a new Graph */
   let g = trueno.Graph();
 
-  /* Set label: very important */
+  /* Set label: this is the Graph name or index */
   g.setLabel("histone");
 
   let eQueue = edges;
@@ -31,8 +31,6 @@ trueno.connect((s)=> {
 
   let edgeSource = 0;
   let edgeDestination = 0;
-
-  //console.log(vertices);
 
   vertices.forEach((vertex)=> {
 
@@ -56,9 +54,7 @@ trueno.connect((s)=> {
     /* persist everything into a batch */
     g.openBatch();
 
-    //console.log(htVertices);
-
-    /* Persist all vertices */
+    /* Persist all edges */
     arr.forEach((edge)=> {
       edgeSource = htVertices[edge.source.toString().trim().toUpperCase()].id;
       edgeDestination = htVertices[edge.destination.toString().trim().toUpperCase().substring(0,edge.destination.toString().length)].id;
@@ -73,7 +69,6 @@ trueno.connect((s)=> {
 
       if (edgeSource == null || edgeDestination == null){
         badEdges++;
-        //console.log("Error, not endpoint defined " + badEdges++);
       }
       else {
         let e = g.addEdge(edgeSource, edgeDestination);
@@ -115,10 +110,9 @@ trueno.connect((s)=> {
 
   }//insertEdge
 
-  /* Initiating vertex insertion */
+  /* Initiating edge insertion */
   insertEdge(eQueue.splice(0, batchSize));
 
 }, (s)=> {
   console.log('disconnected', s.id);
 });
-
